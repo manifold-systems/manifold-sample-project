@@ -4,7 +4,9 @@ import abc.res.Contact;
 import abc.res.MyProperties;
 import abc.res.Person;
 import abc.res.logo_png;
+import abc.stuff.Coordinate;
 
+import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,7 +21,7 @@ import java.util.List;
  * </pre>
  * Use features such as: Navigation, Code completion, Find Usages, Rename Refactor, Move Refactor, Go To Declaration, etc.
  */
-public class Main {
+public class RunMe {
   public static void main(String[] args) {
     useJsonSample();
     useJsonSchema();
@@ -27,6 +29,7 @@ public class Main {
     useProperties();
     useCustomExtension();
     useProvidedExtension();
+    useStructuralInterface();
   }
 
   private static void useJsonSample() {
@@ -69,5 +72,15 @@ public class Main {
     List<Integer> list = Arrays.asList(1, 2, 3);
     System.out.println(list.first());
     System.out.println(list.join(", "));
+  }
+
+  private static void useStructuralInterface() {
+    // No casting necessary, Point indirectly implements Coordinate via extension (see MyPointExt)
+    Coordinate coord = new Point(4, 5);
+    System.out.println("x: " + coord.getX() + ", y: " + coord.getY());
+
+    // Casting necessary, Rectangle does not nominally implement Coordinate
+    Coordinate loc = (Coordinate) new Rectangle(3, 4, 5, 6);
+    System.out.println("x: " + loc.getX() + ", y: " + loc.getY());
   }
 }
