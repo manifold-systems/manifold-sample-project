@@ -6,14 +6,14 @@
 
   <groupId>systems.manifold</groupId>
   <artifactId>manifold-sample-project</artifactId>
-  <version>0.6-SNAPSHOT</version>
+  <version>0.7-SNAPSHOT</version>
 
   <dependencies>
     <!--Use all core Manifold features-->
     <dependency>
       <groupId>systems.manifold</groupId>
       <artifactId>manifold-all</artifactId>
-      <version>0.5-SNAPSHOT</version>
+      <version>RELEASE</version>
     </dependency>
   </dependencies>
 
