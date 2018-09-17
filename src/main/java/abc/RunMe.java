@@ -7,6 +7,7 @@ import abc.res.logo_png;
 import abc.stuff.Coordinate;
 
 import java.awt.*;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class RunMe {
     useCustomExtension();
     useProvidedExtension();
     useStructuralInterface();
+    useStringTemplates();
   }
 
   private static void useJsonSample() {
@@ -82,5 +84,16 @@ public class RunMe {
     // Casting necessary, Rectangle does not nominally implement Coordinate
     Coordinate loc = (Coordinate) new Rectangle(3, 4, 5, 6);
     System.out.println("x: " + loc.getX() + ", y: " + loc.getY());
+  }
+
+  private static void useStringTemplates() {
+    int hour = 5;
+    int minute = 30;
+    String time = "The time is $hour:$minute";
+    System.out.println(time);
+
+    LocalTime localTime = LocalTime.now();
+    String ltime = "The time is ${localTime.getHour()}:${localTime.getMinute()}";
+    System.out.println(ltime);
   }
 }
