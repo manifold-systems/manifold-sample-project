@@ -69,27 +69,28 @@
         - add the -Xplugin:Manifold argument for the javac compiler
         - add the manifold-all module to javac -processorpath arg
       -->
+      <!-- Uncomment this <plugin> entry to use JAVA 9+ MULTI-MODULE MODE (don't forget to comment out the other <plugin> entry
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
 
-        <!-- version 3.8.0+ is necessary to support Java 10+ -->
+        &lt;!&ndash; version 3.8.0+ is necessary to support Java 10+ &ndash;&gt;
         <version>3.8.0</version>
 
         <configuration>
           <encoding>UTF-8</encoding>
           <compilerArgs>
 
-            <!--Add the manifold-all module-->
-            <arg>--add-modules</arg>
+            &lt;!&ndash;Add the manifold-all module&ndash;&gt;
+            <arg>&#45;&#45;add-modules</arg>
             <arg>manifold.all</arg>
 
-            <!--Add the Manifold plugin, with string templates enabled-->
+            &lt;!&ndash;Add the Manifold plugin, with string templates enabled&ndash;&gt;
             <arg>-Xplugin:Manifold strings</arg>
 
           </compilerArgs>
 
-          <!-- Add the processor path for the plugin (required for Java 9+ -->
+          &lt;!&ndash; Add the processor path for the plugin (required for Java 9+ &ndash;&gt;
           <annotationProcessorPaths>
             <path>
               <groupId>systems.manifold</groupId>
@@ -100,8 +101,9 @@
 
         </configuration>
       </plugin>
+      -->
 
-
+      
       <!--
        *** JAVA 9+ DEFAULT MODULE MODE***
         (project does *NOT* define module-info.java file)
@@ -110,24 +112,23 @@
        - add the -Xplugin:Manifold argument for the javac compiler
        - add the manifold-all module to javac -processorpath arg
       -->
-      <!--
        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
 
-          &lt;!&ndash; version 3.8.0+ is necessary to support Java 10+ &ndash;&gt;
+          <!-- version 3.8.0+ is necessary to support Java 10+ -->
           <version>3.8.0</version>
 
           <configuration>
             <encoding>UTF-8</encoding>
             <compilerArgs>
 
-              &lt;!&ndash;Add the Manifold plugin, with string templates enabled&ndash;&gt;
+              <!--Add the Manifold plugin, with string templates enabled-->
               <arg>-Xplugin:Manifold strings</arg>
 
             </compilerArgs>
 
-            &lt;!&ndash; Add the processor path for the plugin (required for Java 9+ &ndash;&gt;
+            <!-- Add the processor path for the plugin (required for Java 9+ -->
             <annotationProcessorPaths>
               <path>
                 <groupId>systems.manifold</groupId>
@@ -138,7 +139,6 @@
 
           </configuration>
         </plugin>
-      -->
 
       
       <!--
@@ -147,7 +147,7 @@
        Configure the maven-compiler-plugin use Manifold.
        - add the -Xplugin:Manifold argument for the javac compiler
       -->
-      <!--
+      <!-- Uncomment this <plugin> entry to use JAVA 8 (don't forget to comment out the other <plugin> entry
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>

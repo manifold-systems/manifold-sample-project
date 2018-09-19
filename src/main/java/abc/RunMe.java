@@ -20,7 +20,14 @@ import java.util.List;
  * <pre>
  * File | Settings | Plugins | Browse Repositories | Manifold
  * </pre>
- * Use features such as: Navigation, Code completion, Find Usages, Rename Refactor, Move Refactor, Go To Declaration, etc.
+ * Use IntelliJ features such as: <ul>
+ *   <li/> Navigation
+ *   <li/> Code completion
+ *   <li/> Find Usages
+ *   <li/> Rename/Move Refactor
+ *   <li/> Incremental compilation
+ *   <li/> Hotswap debugging
+ * </ul>
  */
 public class RunMe {
   public static void main(String[] args) {
