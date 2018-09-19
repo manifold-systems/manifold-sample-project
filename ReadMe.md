@@ -5,10 +5,23 @@ Utilize a small sampling of core Manifold features to demonstrate the
 structure of a basic project using Manifold. Use the `pom.xml` file as a
 template for your own project.
 
-Play with this in IntelliJ IDEA using the <b>Manifold</b> plugin:
+If you simply want to experiment with Manifold, grab the [Manifold sample project](https://github.com/manifold-systems/manifold-sample-project) and go nuts:
 
-```
-File | Settings | Plugins | Browse Repositories | Manifold
-```
+* `git clone https://github.com/manifold-systems/manifold-sample-project.git`
+* Open [IntelliJ IDEA](https://www.jetbrains.com/idea/download)
+* Install the **Manifold plugin** from within IntelliJ: `Settings | Plugins | Browse Repositories | Manifold`
+* Restart IntelliJ to use the plugin
+* Open the project you just cloned (open the root directory or the pom.xml file)
+* Add the [Java 10 JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk10-downloads-4416644.html?): `File | Project Structure | SDKs | + | path-to-your-Jdk10`
+* Set the project JDK and language level: `File | Project Structure | Project` select `10` for both `Project JDK` and `Project language level`
+* Build the project
+* Go nuts
 
-Use features such as: Navigation, Code completion, Find Usages, Rename Refactor, Move Refactor, Go To Declaration, etc.
+Use IntelliJ features such as:<lu>
+ <li> Navigation
+ <li> Code Completion
+ <li> Find Usages
+ <li> Rename and Move Refactor
+ <li> Incremental Compilation
+ <li> Hotswap Debugging
+</u>
