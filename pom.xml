@@ -9,7 +9,7 @@
   <version>${manifold-version}</version>
   
   <properties>
-    <manifold-version>0.24-alpha</manifold-version>
+    <manifold-version>0.25-alpha</manifold-version>
     <maven.compiler.source>10</maven.compiler.source>
     <maven.compiler.target>10</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
