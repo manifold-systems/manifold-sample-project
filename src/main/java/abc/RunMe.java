@@ -5,12 +5,11 @@ import abc.stuff.Car;
 import abc.stuff.CarBuilder;
 import abc.stuff.Coordinate;
 import abc.stuff.SampleClass;
-import manifold.ext.api.JailBreak;
+import manifold.ext.api.Jailbreak;
 
 import java.awt.*;
 import java.time.LocalTime;
 import java.util.Arrays;
-import java.util.List;
 
 import static java.lang.System.out;
 
@@ -42,9 +41,9 @@ public class RunMe {
     useProvidedExtension();
     useStructuralInterface();
     useSelfType();
-    useJailBreak();
+    useJailbreak();
     useStringLiteralTemplates();
-    useJavaFileTemplates();
+    useTemplateManifold();
   }
 
   private static void useImage() {
@@ -90,9 +89,9 @@ public class RunMe {
 
   private static void useProvidedExtension() {
     System.out.println("\n\n### Use Collections Extension Library ###\n");
-    List<Integer> list = Arrays.asList(1, 2, 3);
+    Iterable<Integer> list = Arrays.asList(1, 2, 3);
     out.println(list.first());
-    out.println(list.join(", "));
+    out.println(list.joinToString(", "));
   }
 
   private static void useStructuralInterface() {
@@ -117,19 +116,19 @@ public class RunMe {
     System.out.println(car.getName());
   }
 
-  private static void useJailBreak() {
-    System.out.println("\n\n### Use JailBreak (Type-safe Reflection) ###\n");
-    @JailBreak SampleClass sample = new SampleClass();
+  private static void useJailbreak() {
+    System.out.println("\n\n### Use Jailbreak (Type-safe Reflection) ###\n");
+    @Jailbreak SampleClass sample = new SampleClass();
     out.println(sample.privateMethod());
     sample._privateField = "assign to private field";
     out.println(sample._privateField);
-    sample = new abc.stuff. @JailBreak SampleClass("use hidden constructor");
+    sample = new abc.stuff. @Jailbreak SampleClass("use hidden constructor");
     out.println(sample._privateField);
 
     String data = new SampleClass().jailbreak().privateMethod();
     System.out.println(data);
 
-    @JailBreak LocalTime time = LocalTime.now();
+    @Jailbreak LocalTime time = LocalTime.now();
     time.hour = 10; // private field
     System.out.println(time);
   }
@@ -138,17 +137,17 @@ public class RunMe {
     System.out.println("\n\n### Use String Literal Templates ###\n");
     int hour = 5;
     int minute = 30;
-    String time = "The time is $hour:$minute";
-    out.println(time);
+    String nice = "The time is $hour:$minute";
+    out.println(nice);
 
-    LocalTime localTime = LocalTime.now();
-    String ltime = "The time is ${localTime.getHour()}:${localTime.getMinute()}";
-    out.println(ltime);
+    LocalTime time = LocalTime.now();
+    String cool = "The time is ${time.getHour()}:${String.format(\"%02d\", time.getMinute())}";
+    out.println(cool);
   }
   
-  private static void useJavaFileTemplates() {
+  private static void useTemplateManifold() {
     System.out.println("\n\n### Use ManTL (Type-safe Templates) ###\n");
-    String html = SampleTemplate.render("Scott");
+    String html = SampleTemplate.render("ZOMG");
     System.out.println(html);
   }
 }

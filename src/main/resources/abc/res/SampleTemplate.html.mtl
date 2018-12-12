@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title></title>
+  <title>Use Template Manifold (ManTL)</title>
 </head>
 <body>
   The letters in <i>${name}</i>:
