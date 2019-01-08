@@ -74,7 +74,7 @@ public class RunMe {
     System.out.println("\n\n### Use JSON Schema Type Manifold ###\n");
     Contact contact = Contact.create();
     contact.setName("Bob");
-    contact.setPrimaryAddress(Contact.Address.create());
+    contact.setPrimaryAddress(Contact.Address.create("111 Main St.", "Cupertino", "CA"));
     Contact.Address primaryAddress = contact.getPrimaryAddress();
     primaryAddress.setCity("Cupertino");
     primaryAddress.setState("CA");
