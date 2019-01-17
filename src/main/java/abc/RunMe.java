@@ -8,6 +8,7 @@ import abc.stuff.SampleClass;
 import manifold.ext.api.Jailbreak;
 
 import java.awt.*;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
 
@@ -72,9 +73,10 @@ public class RunMe {
 
   private static void useJsonSchema() {
     out.println("\n\n### Use JSON Schema Type Manifold ###\n");
-    Contact contact = Contact.create();
-    contact.setName("Bob");
-    contact.setPrimaryAddress(Contact.Address.create("111 Main St.", "Cupertino", "CA"));
+    Contact contact = Contact.builder()
+      .withName("Scott McKinney")
+      .withPrimaryAddress(Contact.Address.create("111 Main St.", "Cupertino", "CA")).build();
+    contact.setDateOfBirth(LocalDate.of(1986, 8, 9));
     Contact.Address primaryAddress = contact.getPrimaryAddress();
     primaryAddress.setCity("Cupertino");
     primaryAddress.setState("CA");
