@@ -76,10 +76,9 @@ public class RunMe {
     Contact contact = Contact.builder()
       .withName("Scott McKinney")
       .withDateOfBirth(LocalDate.of(1986, 8, 9))
-      .withPrimaryAddress(Contact.Address.create("111 Main St.", "Cupertino", "CA")).build();
-    Contact.Address primaryAddress = contact.getPrimaryAddress();
-    primaryAddress.setCity("Cupertino");
-    primaryAddress.setState("CA");
+      .withPrimaryAddress(
+        Contact.Address.create("111 Main St.", "Cupertino", "CA"))
+      .build();
     out.println(contact.toJson());
   }
 
@@ -107,8 +106,7 @@ public class RunMe {
     out.println("x: " + loc.getX() + ", y: " + loc.getY());
   }
 
-  private static void useSelfType()
-  {
+  private static void useSelfType() {
     out.println("\n\n### Use Self Type ###\n");
     CarBuilder carBuilder = new CarBuilder();
     Car car = carBuilder
@@ -124,7 +122,7 @@ public class RunMe {
     out.println(sample.privateMethod());
     sample._privateField = "assign to private field";
     out.println(sample._privateField);
-    sample = new abc.stuff. @Jailbreak SampleClass("use hidden constructor");
+    sample = new abc.stuff.@Jailbreak SampleClass("use hidden constructor");
     out.println(sample._privateField);
 
     String data = new SampleClass().jailbreak().privateMethod();
@@ -146,7 +144,7 @@ public class RunMe {
     String cool = "The time is ${time.getHour()}:${String.format(\"%02d\", time.getMinute())}";
     out.println(cool);
   }
-  
+
   private static void useTemplateManifold() {
     out.println("\n\n### Use ManTL (Type-safe Templates) ###\n");
     String html = SampleTemplate.render("ZOMG");
