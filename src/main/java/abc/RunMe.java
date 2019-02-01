@@ -28,6 +28,7 @@ import static java.lang.System.out;
  * <li/> Code completion
  * <li/> Find Usages
  * <li/> Rename/Move Refactor
+ * <li/> Professional Template Authoring
  * <li/> Incremental compilation
  * <li/> Hotswap debugging
  * </ul>
@@ -38,6 +39,7 @@ public class RunMe {
     useProperties();
     useJsonSample();
     useJsonSchema();
+    useYamlUsingJsonSchema();
     useCustomExtension();
     useProvidedExtension();
     useStructuralInterface();
@@ -48,38 +50,49 @@ public class RunMe {
   }
 
   private static void useImage() {
-    out.println("\n\n### Use Image Type Manifold ###\n");
+    out.println("\n\n### Use Image Manifold ###\n");
     logo_png logoImage = logo_png.get();
     out.println(logoImage.getIconWidth());
   }
 
   private static void useProperties() {
-    out.println("\n\n### Use Properties Type Manifold ###\n");
+    out.println("\n\n### Use Properties Manifold ###\n");
     out.println(MyProperties.Chocolate);
     out.println(MyProperties.Chocolate.dark);
     out.println(MyProperties.Chocolate.milk);
   }
 
   private static void useJsonSample() {
-    out.println("\n\n### Use JSON Sample Type Manifold ###\n");
+    out.println("\n\n### Use JSON Manifold With JSON Sample ###\n");
     Person person = Person.create();
-    person.setName("Bob");
+    person.setName("Scott");
     person.setAddress(Person.Address.create());
     Person.Address address = person.getAddress();
     address.setCity("Cupertino");
     address.setState("CA");
-    out.println(person.toJson());
+    out.println(person.write().toJson());
   }
 
   private static void useJsonSchema() {
-    out.println("\n\n### Use JSON Schema Type Manifold ###\n");
+    out.println("\n\n### Use JSON Manifold With JSON Schema ###\n");
     Contact contact = Contact.builder()
       .withName("Scott McKinney")
       .withDateOfBirth(LocalDate.of(1986, 8, 9))
-      .withPrimaryAddress(
-        Contact.Address.create("111 Main St.", "Cupertino", "CA"))
+      .withPrimaryAddress(Contact.Address.create("111 Main St.", "Cupertino", "CA"))
+      .withContactAddresses(Arrays.asList(Contact.Address.create("a", "b", "c")))
       .build();
-    out.println(contact.toJson());
+    out.println(contact.write().toJson());
+  }
+
+  private static void useYamlUsingJsonSchema() {
+    out.println("\n\n### Use YAML Manifold With JSON Schema ###\n");
+    Contact2 contact = Contact2.builder()
+      .withName("Scott McKinney")
+      .withDateOfBirth(LocalDate.of(1986, 8, 9))
+      .withPrimaryAddress(Contact2.Address.create("111 Main St.", "Cupertino", "CA"))
+      .withContactAddresses(Arrays.asList(Contact2.Address.create("a", "b", "c")))
+      .build();
+    out.println(contact.write().toJson());
   }
 
   private static void useCustomExtension() {
@@ -146,7 +159,7 @@ public class RunMe {
   }
 
   private static void useTemplateManifold() {
-    out.println("\n\n### Use ManTL (Type-safe Templates) ###\n");
+    out.println("\n\n### Use ManTL (Type-safe Java Templates) ###\n");
     String html = SampleTemplate.render("ZOMG");
     out.println(html);
   }
