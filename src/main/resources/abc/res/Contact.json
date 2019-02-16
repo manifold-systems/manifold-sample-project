@@ -23,7 +23,7 @@
         "$ref" : "#/definitions/Address"
       }
     },
-    "DateOfBirth" : {
+    "DateOfBirth": {
       "type" : "string",
       "format" : "date"
     },
