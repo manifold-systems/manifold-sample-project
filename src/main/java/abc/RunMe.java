@@ -10,7 +10,11 @@ import manifold.ext.api.Jailbreak;
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.chrono.ChronoLocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 
 import static java.lang.System.out;
 
@@ -117,6 +121,11 @@ public class RunMe {
     // Casting necessary, Rectangle does not nominally implement Coordinate
     Coordinate loc = (Coordinate) new Rectangle(3, 4, 5, 6);
     out.println("x: " + loc.getX() + ", y: " + loc.getY());
+
+    // Use a registered IProxyFactory interface to make old Date structurally compatible with new ChronoLocalDateTime
+    // See Date_To_ChronoLocalDateTime and MyChronoLocalDateTimeExt
+    Date date = new Date(82, Calendar.JULY, 4);
+    out.println(((ChronoLocalDateTime) date).plus(1, ChronoUnit.MONTHS));
   }
 
   private static void useSelfType() {
