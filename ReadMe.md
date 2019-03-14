@@ -25,5 +25,6 @@ Use IntelliJ features such as:<lu>
  <li> Incremental Compilation
  <li> Hotswap Debugging
  <li> Template authoring
+ <li> Extension method creation
  <li> ...
 </u>
