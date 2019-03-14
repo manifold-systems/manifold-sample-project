@@ -5,7 +5,7 @@ Utilize a small sampling of core Manifold features to demonstrate the
 structure of a basic project using Manifold. Use the `pom.xml` file as a
 template for your own project.
 
-If you simply want to experiment with Manifold, grab the [Manifold sample project](https://github.com/manifold-systems/manifold-sample-project) and go nuts:
+If you simply want to experiment with Manifold, this project will help get you started.
 
 * `git clone https://github.com/manifold-systems/manifold-sample-project.git`
 * Open [IntelliJ IDEA](https://www.jetbrains.com/idea/download)
@@ -15,7 +15,7 @@ If you simply want to experiment with Manifold, grab the [Manifold sample projec
 * Add the [Java 11 JDK](https://adoptopenjdk.net/releases.html?variant=openjdk11&jvmVariant=hotspot): `File | Project Structure | SDKs | + | path-to-your-Jdk11`
 * Set the project JDK and language level: `File | Project Structure | Project` select `11` for both `Project JDK` and `Project language level`
 * Build the project
-* Go nuts
+* Examine the `abc/RunMe.java` file
 
 Use IntelliJ features such as:<lu>
  <li> Navigation
@@ -24,4 +24,6 @@ Use IntelliJ features such as:<lu>
  <li> Rename and Move Refactor
  <li> Incremental Compilation
  <li> Hotswap Debugging
+ <li> Template authoring
+ <li> ...
 </u>
