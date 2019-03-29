@@ -8,6 +8,8 @@ import abc.stuff.SampleClass;
 import manifold.ext.api.Jailbreak;
 
 import java.awt.*;
+import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.chrono.ChronoLocalDateTime;
@@ -15,6 +17,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.lang.System.out;
 
@@ -49,6 +53,7 @@ public class RunMe {
     useStructuralInterface();
     useSelfType();
     useJailbreak();
+    useCheckedExceptionSuppression();
     useStringLiteralTemplates();
     useTemplateManifold();
   }
@@ -171,5 +176,25 @@ public class RunMe {
     out.println("\n\n### Use ManTL (Type-safe Java Templates) ###\n");
     String html = SampleTemplate.render("ZOMG");
     out.println(html);
+  }
+
+  private static void useCheckedExceptionSuppression() {
+    out.println("\n\n### Use Checked Exception Suppression ###\n");
+    java.util.List<String> list = Arrays.asList("http://manifold.systems", "https://github.com/manifold-systems/manifold");
+    List<URL> urls = list.map(URL::new).collect(Collectors.toList()); // w/o suppression, this would have compile errors
+    urls.forEach(out::println);
+    boom(); // w/o suppression, this would have a compile error
+  }
+
+  private static void boom() throws IOException
+  {
+    if( false )
+      throw new IOException();
+  }
+
+  private static void freedom()
+  {
+    if( false )
+      throw new IOException(); // w/o suppression this would have a compile error
   }
 }

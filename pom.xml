@@ -9,7 +9,7 @@
   <version>${manifold-version}</version>
   
   <properties>
-    <manifold-version>0.53-alpha</manifold-version>
+    <manifold-version>0.55-alpha</manifold-version>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -123,8 +123,8 @@
             <encoding>UTF-8</encoding>
             <compilerArgs>
 
-              <!--Add the Manifold plugin, with string templates enabled-->
-              <arg>-Xplugin:Manifold strings</arg>
+              <!--Add the Manifold plugin, with string templates and checked exception suppression enabled-->
+              <arg>-Xplugin:Manifold strings exceptions</arg>
 
             </compilerArgs>
 
