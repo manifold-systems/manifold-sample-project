@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static abc.res.movies.Genre.Action;
 import static java.lang.System.out;
 
 /**
@@ -29,7 +30,7 @@ import static java.lang.System.out;
  * <p/>
  * Play with this in IntelliJ IDEA using the <b>Manifold</b> plugin:
  * <pre>
- * File | Settings | Plugins | Browse Repositories | Manifold
+ * Settings | Plugins | Marketplace | search: 'Manifold'
  * </pre>
  * Use IntelliJ features such as: <ul>
  * <li/> Navigation
@@ -39,6 +40,7 @@ import static java.lang.System.out;
  * <li/> Professional Template Authoring
  * <li/> Incremental compilation
  * <li/> Hotswap debugging
+ * <li/> etc.
  * </ul>
  */
 public class RunMe {
@@ -48,6 +50,7 @@ public class RunMe {
     useJsonSample();
     useJsonSchema();
     useYamlUsingJsonSchema();
+    useGraphQL();
     useCustomExtension();
     useProvidedExtension();
     useStructuralInterface();
@@ -102,6 +105,25 @@ public class RunMe {
       .withContactAddresses(Arrays.asList(Contact2.Address.create("a", "b", "c")))
       .build();
     out.println(contact.write().toJson());
+  }
+
+  private static void useGraphQL() {
+    out.println("\n\n### Use GraphQL Schemas ###\n");
+    // Create new data
+    movies.Person steveMcQueen = movies.Person.builder("anId", "Steve McQueen", LocalDate.of(1930, 3, 24))
+      .withHeight(1.77)
+      .withNationality("American")
+      .build();
+    out.println(steveMcQueen.write().toJson());
+
+    // Build and execute queries
+    queries.MovieQuery query = queries.MovieQuery.builder()
+      .withGenre(Action)
+      .build();
+    out.println(query.write().toJson());
+    // Execute the query (requires GraphQL server)
+    //var result = query.request("http://example.com/graphql").post();
+    //var actionMovies = result.getMovies();
   }
 
   private static void useCustomExtension() {
