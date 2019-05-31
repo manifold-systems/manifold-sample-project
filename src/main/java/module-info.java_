@@ -5,9 +5,14 @@
 // "Java 9 or later module mode" and comment out the existing maven-compiler-plugin
 // setting.
 
-module manifold.sample.project {
+module sample_project {
   requires manifold.all;
   requires java.scripting;  // using Json manifold: for javax.script.Bindings
   requires java.desktop;    // using Image manifold: for javax.swing.ImageIcon
-  requires jdk.unsupported; // for java 11
+  requires jdk.unsupported; // for java 11+
+
+  // Register the sample Date proxy factory service implementation
+  // (note the META-INF/services registration is still necessary for Java 8 and Java 9+ single-module)
+  provides manifold.ext.api.IProxyFactory
+    with sample_project.extensions.java.time.chrono.ChronoLocalDateTime.Date_To_ChronoLocalDateTime;
 }

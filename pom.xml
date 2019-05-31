@@ -9,8 +9,8 @@
   <version>${manifold-version}</version>
   
   <properties>
-    <manifold-version>0.71-SNAPSHOT</manifold-version>
     <maven.compiler.source>11</maven.compiler.source>
+    <manifold-version>2019.1.0-ea</manifold-version>
     <maven.compiler.target>11</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>

@@ -1,4 +1,4 @@
-package extensions.java.lang.String;
+package sample_project.extensions.java.lang.String;
 
 import manifold.ext.api.Extension;
 import manifold.ext.api.This;
