@@ -10,7 +10,7 @@
   
   <properties>
     <maven.compiler.source>11</maven.compiler.source>
-    <manifold-version>2019.1.0-ea</manifold-version>
+    <manifold-version>2019.1.5</manifold-version>
     <maven.compiler.target>11</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -62,7 +62,7 @@
 
       <!--
         *** JAVA 9+ MULTI-MODULE MODE ***
-         (project defines module-info.java file)
+         (project defines module-info.java_ file)
         
         Configure the maven-compiler-plugin use Manifold.
         - add the manifold-all module to -add-modules arg
@@ -106,7 +106,7 @@
       
       <!--
        *** JAVA 9+ DEFAULT MODULE MODE***
-        (project does *NOT* define module-info.java file)
+        (project does *NOT* define module-info.java_ file)
 
        Configure the maven-compiler-plugin use Manifold.
        - add the -Xplugin:Manifold argument for the javac compiler

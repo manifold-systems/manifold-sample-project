@@ -12,7 +12,7 @@ module sample_project {
   requires jdk.unsupported; // for java 11+
 
   // Register the sample Date proxy factory service implementation
-  // (note the META-INF/services registration is still necessary for Java 8 and Java 9+ single-module)
+  // (note the META-INF/services registration is still necessary for Java 8 and Java 9+ unnamed-module)
   provides manifold.ext.api.IProxyFactory
     with sample_project.extensions.java.time.chrono.ChronoLocalDateTime.Date_To_ChronoLocalDateTime;
 }
