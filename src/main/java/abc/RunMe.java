@@ -7,7 +7,8 @@ import abc.stuff.Coordinate;
 import abc.stuff.SampleClass;
 import manifold.ext.api.Jailbreak;
 
-import java.awt.*;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -37,6 +38,7 @@ import static java.lang.System.out;
  * <li/> Code completion
  * <li/> Find Usages
  * <li/> Rename/Move Refactor
+ * <li/> Fragment support
  * <li/> Professional Template Authoring
  * <li/> Incremental compilation
  * <li/> Hotswap debugging
@@ -49,8 +51,10 @@ public class RunMe {
     useProperties();
     useJsonSample();
     useJsonSchema();
+    useJsonFragment();
     useYamlUsingJsonSchema();
     useGraphQL();
+    useGraphQLFragment();
     useCustomExtension();
     useProvidedExtension();
     useStructuralInterface();
@@ -59,6 +63,8 @@ public class RunMe {
     useCheckedExceptionSuppression();
     useStringLiteralTemplates();
     useTemplateManifold();
+    useJavascript();
+    useJavascriptFragment();
   }
 
   private static void useImage() {
@@ -76,6 +82,7 @@ public class RunMe {
 
   private static void useJsonSample() {
     out.println("\n\n### Use JSON Manifold With JSON Sample ###\n");
+    // Create instances of the *type* inferred from the sample data in Person.json
     Person person = Person.create();
     person.setName("Scott");
     person.setAddress(Person.Address.create());
@@ -83,6 +90,11 @@ public class RunMe {
     address.setCity("Cupertino");
     address.setState("CA");
     out.println(person.write().toJson());
+
+    // Use the JSON sample *data* from Person.json itself types-safely
+    Person p = Person.fromSource();
+    out.println(p.getName());
+    out.println(p.getAge());
   }
 
   private static void useJsonSchema() {
@@ -94,6 +106,24 @@ public class RunMe {
       .withContactAddresses(Arrays.asList(Contact.Address.create("a", "b", "c")))
       .build();
     out.println(contact.write().toJson());
+  }
+
+  private static void useJsonFragment() {
+    out.println("\n\n### Use Json Fragment ###\n");
+    /*[>Dude.json<] {
+      "Name": "Scott",
+      "Age": 100,
+      "Address": {
+        "Street": "345 Syracuse Way",
+        "City": "Atlantis"
+      }
+    }
+    */
+
+    Dude dude = Dude.fromSource();
+    out.println(dude.getName());
+    out.println(dude.getAge());
+    out.println(dude.getAddress().getCity());
   }
 
   private static void useYamlUsingJsonSchema() {
@@ -121,9 +151,38 @@ public class RunMe {
       .withGenre(Action)
       .build();
     out.println(query.write().toJson());
-    // Execute the query (requires GraphQL server)
-    //var result = query.request("http://example.com/graphql").post();
-    //var actionMovies = result.getMovies();
+
+    // Executing the query requires a GraphQL server or test infrastructure,
+    // see GraphQL sample app at https://github.com/manifold-systems/manifold-sample-graphql-app)
+    //
+    // query execution is simple and looks like this:
+    //
+    // var result = query.request("http://example.com/graphql").post();
+    // var actionMovies = result.getMovies();
+  }
+
+  private static void useGraphQLFragment() {
+    out.println("\n\n### Use GraphQL Fragment ###\n");
+
+    // Note get the JS GraphQL IntelliJ plugin for rich editing of embedded GraphQL fragments
+
+    /*[>MyQuery.graphql<]
+    query Movies($title: String, $genre: Genre, $releaseDate: Date) {
+        movies(title: $title, genre: $genre, releaseDate: $releaseDate) {
+            id
+            title
+            genre
+            releaseDate
+        }
+    }
+    */
+
+    var query = MyQuery.Movies.builder().withGenre(Action).build();
+    out.println(query.toString());
+    // experimental
+    //    var q = "[>.graphql<] query MovieQuery($genre: Genre){ movies(genre: $genre){ genre } }";
+    //    var result = q.builder().build().request("").post();
+    //    result.getMovies().forEach( e -> e.getGenre() );
   }
 
   private static void useCustomExtension() {
@@ -208,15 +267,68 @@ public class RunMe {
     boom(); // w/o suppression, this would have a compile error
   }
 
-  private static void boom() throws IOException
-  {
-    if( false )
+  private static void boom() throws IOException {
+    if (false)
       throw new IOException();
   }
 
-  private static void freedom()
-  {
-    if( false )
+  private static void freedom() {
+    if (false)
       throw new IOException(); // w/o suppression this would have a compile error
+  }
+
+  private static void useJavascript() {
+    out.println("\n\n### Use Javascript Manifold ###\n");
+
+    // Use a js *program*
+    out.println(BasicJavascriptProgram.bar());
+    out.println(BasicJavascriptProgram.incrementAndGet());
+    out.println(BasicJavascriptProgram.incrementAndGet());
+    out.println(BasicJavascriptProgram.identity("Foo"));
+    out.println(BasicJavascriptProgram.identity(1));
+
+    // Use a *class*
+    MyClass myClass = new MyClass("foo", 5);
+    out.println(myClass.getFoo());
+    out.println(myClass.getBar());
+    myClass.setFoo("foo2");
+    myClass.setBar(6);
+    out.println(myClass.getFoo());
+    out.println(myClass.getBar());
+    out.println(MyClass.somethingStatic());
+  }
+
+  private static void useJavascriptFragment() {
+    out.println("\n\n### Use Javascript Fragment ###\n");
+
+    // Embedded fragment (requires IJ Ultimate Edition for JS code injection editing)
+
+    /*[>Sample.js<]
+    function total(list) {
+      return reduce(list, (sum, entry) => {
+        return sum + entry.intValue();
+      })
+    }
+
+    function max(list) {
+      return reduce(list, (max, entry) => {
+        return max < entry.intValue() ? entry.intValue() : max;
+      })
+    }
+
+    function reduce(list, f) {
+      var acc = null;
+      for (var i = 0; i < list.size(); i++) {
+        acc = f(acc, list.get(i));
+      }
+      return acc;
+    }
+    */
+    out.println("Sum: " + Sample.total(Arrays.asList(1, 2, 3)));
+    out.println("Max: " + Sample.max(Arrays.asList(1, 2, 3)));
+
+    // Fragment *evaluation* from String literal (experimental)
+    //var value = (int) "[>.js<] 3 + 4 + 5";
+    //out.println(value);
   }
 }
