@@ -24,6 +24,10 @@ import java.util.stream.Collectors;
 import static abc.res.movies.Genre.Action;
 import static java.lang.System.out;
 
+// use #define to demonstrate use of the Preprocessor
+#define EXPERIMENTAL
+#undef EXPERIMENTAL // remove this #undef to test experimental features
+
 /**
  * Utilize a small sampling of core Manifold features to demonstrate the
  * structure of a basic project using Manifold. Use the pom.xml file as a
@@ -51,10 +55,8 @@ public class RunMe {
     useProperties();
     useJsonSample();
     useJsonSchema();
-    useJsonFragment();
     useYamlUsingJsonSchema();
     useGraphQL();
-    useGraphQLFragment();
     useCustomExtension();
     useProvidedExtension();
     useStructuralInterface();
@@ -64,7 +66,12 @@ public class RunMe {
     useStringLiteralTemplates();
     useTemplateManifold();
     useJavascript();
+
+    #if EXPERIMENTAL
+    useJsonFragment();
+    useGraphQLFragment();
     useJavascriptFragment();
+    #endif
   }
 
   private static void useImage() {
@@ -108,6 +115,7 @@ public class RunMe {
     out.println(contact.write().toJson());
   }
 
+  #if EXPERIMENTAL
   private static void useJsonFragment() {
     out.println("\n\n### Use Json Fragment ###\n");
     /*[>Dude.json<] {
@@ -125,6 +133,7 @@ public class RunMe {
     out.println(dude.getAge());
     out.println(dude.getAddress().getCity());
   }
+  #endif
 
   private static void useYamlUsingJsonSchema() {
     out.println("\n\n### Use YAML Manifold With JSON Schema ###\n");
@@ -161,6 +170,7 @@ public class RunMe {
     // var actionMovies = result.getMovies();
   }
 
+#if EXPERIMENTAL
   private static void useGraphQLFragment() {
     out.println("\n\n### Use GraphQL Fragment ###\n");
 
@@ -184,6 +194,7 @@ public class RunMe {
     //    var result = q.builder().build().request("").post();
     //    result.getMovies().forEach( e -> e.getGenre() );
   }
+#endif
 
   private static void useCustomExtension() {
     out.println("\n\n### Use Custom Extension Method ###\n");
@@ -298,6 +309,7 @@ public class RunMe {
     out.println(MyClass.somethingStatic());
   }
 
+#if EXPERIMENTAL
   private static void useJavascriptFragment() {
     out.println("\n\n### Use Javascript Fragment ###\n");
 
@@ -331,4 +343,5 @@ public class RunMe {
     //var value = (int) "[>.js<] 3 + 4 + 5";
     //out.println(value);
   }
+#endif
 }
