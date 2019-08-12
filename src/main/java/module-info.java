@@ -1,15 +1,12 @@
-// Note if this file is named module-info.java_ (with an underscore at the end),
-// it disables multi-module mode in Java 9 or later.  Remove the underscore to
-// enable multi-module mode. But doing so requires a change to the pom.xml file.
-// You'll need to uncomment the maven-compiler-plugin section corresponding with
-// "Java 9 or later module mode" and comment out the existing maven-compiler-plugin
-// setting.
-
-module sample_project {
+module manifold.sample.project {
+  // Use the Manifold "uber" JAR for convenient access to all of Manifold's components and features
   requires manifold.all;
-  requires java.scripting;  // using Json manifold: for javax.script.Bindings
-  requires java.desktop;    // using Image manifold: for javax.swing.ImageIcon
-  requires jdk.unsupported; // for java 11+
+
+  // Include transitive dependencies manually since manifold.all is an "automatic" module
+  // (it doesn't define a manifold-info.java file, thus no 'requires' to its dependencies)
+  requires java.scripting;
+  requires java.desktop;
+  requires jdk.unsupported;
 
   // Register the sample Date proxy factory service implementation
   // (note the META-INF/services registration is still necessary for Java 8 and Java 9+ unnamed-module)

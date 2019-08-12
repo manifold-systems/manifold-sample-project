@@ -24,9 +24,9 @@ import java.util.stream.Collectors;
 import static abc.res.movies.Genre.Action;
 import static java.lang.System.out;
 
-// use #define to demonstrate use of the Preprocessor
+// use #define/#undef to demonstrate use of the Preprocessor
 #define EXPERIMENTAL
-#undef EXPERIMENTAL // remove this #undef to test experimental features
+#undef EXPERIMENTAL // comment out this #undef to test experimental features
 
 /**
  * Utilize a small sampling of core Manifold features to demonstrate the
@@ -74,12 +74,14 @@ public class RunMe {
     #endif
   }
 
+  // via manifold-image dependency
   private static void useImage() {
     out.println("\n\n### Use Image Manifold ###\n");
     logo_png logoImage = logo_png.get();
     out.println(logoImage.getIconWidth());
   }
 
+  // via manifold-properties dependency
   private static void useProperties() {
     out.println("\n\n### Use Properties Manifold ###\n");
     out.println(MyProperties.Chocolate);
@@ -87,6 +89,7 @@ public class RunMe {
     out.println(MyProperties.Chocolate.milk);
   }
 
+  // via manifold-json dependency
   private static void useJsonSample() {
     out.println("\n\n### Use JSON Manifold With JSON Sample ###\n");
     // Create instances of the *type* inferred from the sample data in Person.json
@@ -104,6 +107,7 @@ public class RunMe {
     out.println(p.getAge());
   }
 
+  // via manifold-json dependency
   private static void useJsonSchema() {
     out.println("\n\n### Use JSON Manifold With JSON Schema ###\n");
     Contact contact = Contact.builder()
@@ -116,6 +120,7 @@ public class RunMe {
   }
 
   #if EXPERIMENTAL
+  // via manifold-json dependency
   private static void useJsonFragment() {
     out.println("\n\n### Use Json Fragment ###\n");
     /*[>Dude.json<] {
@@ -135,6 +140,7 @@ public class RunMe {
   }
   #endif
 
+  // via manifold-yaml dependency
   private static void useYamlUsingJsonSchema() {
     out.println("\n\n### Use YAML Manifold With JSON Schema ###\n");
     Contact2 contact = Contact2.builder()
@@ -146,6 +152,7 @@ public class RunMe {
     out.println(contact.write().toJson());
   }
 
+  // via manifold-graphql dependency
   private static void useGraphQL() {
     out.println("\n\n### Use GraphQL Schemas ###\n");
     // Create new data
@@ -171,6 +178,7 @@ public class RunMe {
   }
 
 #if EXPERIMENTAL
+  // via manifold-graphql dependency
   private static void useGraphQLFragment() {
     out.println("\n\n### Use GraphQL Fragment ###\n");
 
@@ -196,12 +204,14 @@ public class RunMe {
   }
 #endif
 
+  // via manifold-ext dependency
   private static void useCustomExtension() {
     out.println("\n\n### Use Custom Extension Method ###\n");
     String hello = "hello";
     hello.echo();
   }
 
+  // via manifold-collections dependency
   private static void useProvidedExtension() {
     out.println("\n\n### Use Collections Extension Library ###\n");
     Iterable<Integer> list = Arrays.asList(1, 2, 3);
@@ -209,6 +219,7 @@ public class RunMe {
     out.println(list.joinToString(", "));
   }
 
+  // via manifold-ext dependency
   private static void useStructuralInterface() {
     out.println("\n\n### Use Structural Interfaces ###\n");
     // No casting necessary, Point indirectly implements Coordinate via extension (see MyPointExt)
@@ -225,6 +236,7 @@ public class RunMe {
     out.println(((ChronoLocalDateTime) date).plus(1, ChronoUnit.MONTHS));
   }
 
+  // via manifold-ext dependency
   private static void useSelfType() {
     out.println("\n\n### Use Self Type ###\n");
     CarBuilder carBuilder = new CarBuilder();
@@ -235,6 +247,7 @@ public class RunMe {
     out.println(car.getName());
   }
 
+  // via manifold-ext dependency
   private static void useJailbreak() {
     out.println("\n\n### Use Jailbreak (Type-safe Reflection) ###\n");
     @Jailbreak SampleClass sample = new SampleClass();
@@ -252,6 +265,7 @@ public class RunMe {
     out.println(time);
   }
 
+  // via manifold-strings dependency
   private static void useStringLiteralTemplates() {
     out.println("\n\n### Use String Literal Templates ###\n");
     int hour = 5;
@@ -264,12 +278,14 @@ public class RunMe {
     out.println(cool);
   }
 
+  // via manifold-templates dependency
   private static void useTemplateManifold() {
     out.println("\n\n### Use ManTL (Type-safe Java Templates) ###\n");
     String html = SampleTemplate.render("ZOMG");
     out.println(html);
   }
 
+  // via manifold-exceptions dependency
   private static void useCheckedExceptionSuppression() {
     out.println("\n\n### Use Checked Exception Suppression ###\n");
     java.util.List<String> list = Arrays.asList("http://manifold.systems", "https://github.com/manifold-systems/manifold");
@@ -285,9 +301,10 @@ public class RunMe {
 
   private static void freedom() {
     if (false)
-      throw new IOException(); // w/o suppression this would have a compile error
+      throw new IOException(); // w/o the manifold-exceptions dependency this would have a compile error
   }
 
+  // via manifold-js dependency
   private static void useJavascript() {
     out.println("\n\n### Use Javascript Manifold ###\n");
 
@@ -310,6 +327,7 @@ public class RunMe {
   }
 
 #if EXPERIMENTAL
+  // via manifold-js dependency
   private static void useJavascriptFragment() {
     out.println("\n\n### Use Javascript Fragment ###\n");
 

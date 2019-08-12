@@ -6,11 +6,11 @@
 
   <groupId>systems.manifold</groupId>
   <artifactId>manifold-sample-project</artifactId>
-  <version>${manifold-version}</version>
+  <version>0.1-SNAPSHOT</version>
   
   <properties>
     <maven.compiler.source>11</maven.compiler.source>
-    <manifold-version>2019.1.9</manifold-version>
+    <manifold-version>2019.1.11</manifold-version>
     <maven.compiler.target>11</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -30,84 +30,11 @@
     </dependency>
   </dependencies>
 
-  <!--
-    *** JAVA 8 ***
-
-    Add tools.jar from the jdk (exclusively for Java 8 usage)
-  -->
-  <!--
-    <profiles>
-      <profile>
-        <id>internal.tools-jar</id>
-        <activation>
-          <file>
-            <exists>${java.home}/../lib/tools.jar</exists>
-          </file>
-        </activation>
-        <dependencies>
-          <dependency>
-            <groupId>com.sun</groupId>
-            <artifactId>tools</artifactId>
-            <version>1.8.0</version>
-            <scope>system</scope>
-            <systemPath>${java.home}/../lib/tools.jar</systemPath>
-          </dependency>
-        </dependencies>
-      </profile>
-    </profiles>
-  -->
-
   <build>
     <plugins>
-
-      <!--
-        *** JAVA 9+ MULTI-MODULE MODE ***
-         (project defines module-info.java_ file)
-        
-        Configure the maven-compiler-plugin use Manifold.
-        - add the manifold-all module to -add-modules arg
-        - add the -Xplugin:Manifold argument for the javac compiler
-        - add the manifold-all module to javac -processorpath arg
-      -->
-      <!-- Uncomment this <plugin> entry to use JAVA 9+ MULTI-MODULE MODE (don't forget to comment out the other <plugin> entry
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-
-        &lt;!&ndash; version 3.8.0+ is necessary to support Java 10+ &ndash;&gt;
-        <version>3.8.0</version>
-
-        <configuration>
-          <encoding>UTF-8</encoding>
-          <compilerArgs>
-
-            &lt;!&ndash;Add the manifold-all module&ndash;&gt;
-            <arg>&#45;&#45;add-modules</arg>
-            <arg>manifold.all</arg>
-
-            &lt;!&ndash;Add the Manifold plugin, with string templates enabled&ndash;&gt;
-            <arg>-Xplugin:Manifold strings exceptions</arg>
-
-          </compilerArgs>
-
-          &lt;!&ndash; Add the processor path for the plugin (required for Java 9+ &ndash;&gt;
-          <annotationProcessorPaths>
-            <path>
-              <groupId>systems.manifold</groupId>
-              <artifactId>manifold-all</artifactId>
-              <version>${manifold-version}</version>
-            </path>
-          </annotationProcessorPaths>
-
-        </configuration>
-      </plugin>
-      -->
-
       
       <!--
-       *** JAVA 9+ DEFAULT MODULE MODE***
-        (project does *NOT* define module-info.java_ file)
-
+       *** JAVA 9+ ***
        Configure the maven-compiler-plugin use Manifold.
        - add the -Xplugin:Manifold argument for the javac compiler
        - add the manifold-all module to javac -processorpath arg
@@ -122,10 +49,8 @@
           <configuration>
             <encoding>UTF-8</encoding>
             <compilerArgs>
-
-              <!--Add the Manifold plugin, with string templates and checked exception suppression enabled-->
-              <arg>-Xplugin:Manifold strings exceptions</arg>
-
+              <!--Add the Manifold plugin-->
+              <arg>-Xplugin:Manifold</arg>
             </compilerArgs>
 
             <!-- Add the processor path for the plugin (required for Java 9+ -->
@@ -147,7 +72,7 @@
        Configure the maven-compiler-plugin use Manifold.
        - add the -Xplugin:Manifold argument for the javac compiler
       -->
-      <!-- Uncomment this <plugin> entry to use JAVA 8 (don't forget to comment out the other <plugin> entry
+      <!-- Uncomment this <plugin> entry to use JAVA 8 (don't forget to comment out the other <plugin> entry)
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
@@ -155,13 +80,30 @@
           <configuration>
             <encoding>UTF-8</encoding>
             <compilerArgs>
-
-              &lt;!&ndash;Add the Manifold plugin, with string templates enabled&ndash;&gt;
-              <arg>-Xplugin:Manifold strings exceptions</arg>
-
+              <arg>-Xplugin:Manifold</arg>
             </compilerArgs>
           </configuration>
         </plugin>
+
+        <profiles>
+          <profile>
+            <id>internal.tools-jar</id>
+            <activation>
+              <file>
+                <exists>${java.home}/../lib/tools.jar</exists>
+              </file>
+            </activation>
+            <dependencies>
+              <dependency>
+                <groupId>com.sun</groupId>
+                <artifactId>tools</artifactId>
+                <version>1.8.0</version>
+                <scope>system</scope>
+                <systemPath>${java.home}/../lib/tools.jar</systemPath>
+              </dependency>
+            </dependencies>
+          </profile>
+        </profiles>
       -->
       
     </plugins>
