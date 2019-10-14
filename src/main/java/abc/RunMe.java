@@ -5,11 +5,20 @@ import abc.stuff.Car;
 import abc.stuff.CarBuilder;
 import abc.stuff.Coordinate;
 import abc.stuff.SampleClass;
+import manifold.ext.api.ComparableUsing;
 import manifold.ext.api.Jailbreak;
+import manifold.science.measures.*;
+import manifold.science.util.Rational;
+
+import static manifold.collections.api.range.RangeFun.*;
+import static manifold.science.measures.MetricScaleUnit.M;
+import static manifold.science.util.UnitConstants.*;
+import static manifold.science.util.CoercionConstants.*;
 
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -66,6 +75,9 @@ public class RunMe {
     useStringLiteralTemplates();
     useTemplateManifold();
     useJavascript();
+    useOperatorOverloading();
+    useUnitExpressions();
+    useRanges();
 
     #if EXPERIMENTAL
     useJsonFragment();
@@ -107,7 +119,7 @@ public class RunMe {
     out.println(p.getAge());
   }
 
-  // via manifold-json dependency
+  // via manifold-json dependencyr
   private static void useJsonSchema() {
     out.println("\n\n### Use JSON Manifold With JSON Schema ###\n");
     Contact contact = Contact.builder()
@@ -362,4 +374,128 @@ public class RunMe {
     //out.println(value);
   }
 #endif
+
+  // manifold-ext dependency
+  private static void useOperatorOverloading() {
+    var a = new Foo(2);
+    var b = new Foo(3);
+
+    // use '+' operator directly on Foo
+    var sum = a + b; // Foo(5)
+    out.println(sum.x);
+
+    // use relational operators
+    if (a < b) {
+      out.println("a < b");
+    }
+    // map '==' to compareTo()
+    if (a == new Foo(2)) {
+      out.println(":)");
+    }
+    // Use operators on BigDecimal
+    BigDecimal result = 2.1bd * 3.2bd;
+    out.println(2.1bd < 3.2bd);
+    out.println(2.1bd == 2.1bd);
+  }
+
+  // manifold-ext dependency
+  private static void useUnitExpressions() {
+    // Conveniently use Rational, BigDecimal, etc. (CoercionConstants)
+    Rational rational = 2.1r + 2.2r;
+    BigDecimal result = 2.1bd + 2.2bd;
+
+    // Type-safely work with physical measurements (UnitConstants)
+    Length distance = 75mph * 2.3hr;
+    Force force = 5kg * 9.8m/s/s;
+    Energy e1 = force * 12m;
+    Energy e2 = 200kg m/s/s m;
+
+    // SI formatted measurements (UnitConstants)
+    HeatCapacity kBoltzmann = 1.380649e-23 J/dK;
+    out.println(kBoltzmann);
+
+    // Convenient metric units (MetricScaleUnits)
+    Length longDistance = 5.2M mi; // 5.2 million miles
+
+    // Use your own unit names
+    LengthUnit bigYard = LengthUnit.Meter;
+    Length twoMeters = 2 bigYard;
+
+    // Easily mix units
+    Length measurement = 2 m + 5 in;
+    out.println(measurement);
+    // Display with any unit
+    out.println(measurement.to(ft));
+    // Display as mixed fraction
+    out.println(measurement.to(ft).toMixedString());
+  }
+
+  // manifold-collections dependency
+  private static void useRanges() {
+    // Work with ranges using binder constants from manifold.collections.api.range.RangeFun
+
+    // Easily make ranges on sequential endpoints using 'to'
+    for (int i : 1 to 10) {
+      out.println(i);
+    }
+
+    // Reverse the endpoints
+    for (int i : 10 to 1) {
+      out.println(i);
+    }
+
+    // Use 'step' to define an increment
+    for (Rational i : 1r to 10r step 2r) {
+      out.println(i);
+    }
+
+    // Use variations of 'to' to exclude range endpoints
+    for (Rational i : 1r _to 10r) {
+      out.println(i);
+    }
+
+    // Iterate a range of measures with a 'unit'
+    for (Mass mass : 5kg to 6kg step 2.7r unit oz) {
+      out.println(mass); // increments of 2.7 oz starting with 5kg
+    }
+
+    // Use 'inside' to check for containment on Comparable endpoints
+    if ("le matos" inside "a" to "m~") {
+      out.println("le matos");
+    }
+  }
+
+  /**
+   * Implements operator methods
+   */
+  public static class Foo implements ComparableUsing<Foo> {
+    public final int x;
+
+    public Foo(int x) {
+      this.x = x;
+    }
+
+    /**
+     * implement '+' operator
+     */
+    public Foo plus(Foo that) {
+      return new Foo(x + that.x);
+    }
+
+    /**
+     * ComparableUsing delegates to compareTo() for >, >=, <, <=
+     */
+    @Override
+    public int compareTo(Foo that) {
+      return x - that.x;
+    }
+
+    /**
+     * Use compareTo() for == and !=
+     */
+    @Override
+    public EqualityMode equalityMode() {
+      return EqualityMode.CompareTo;
+    }
+  }
 }
