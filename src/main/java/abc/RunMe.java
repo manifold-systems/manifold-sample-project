@@ -52,7 +52,8 @@ import static java.lang.System.out;
  * <li/> Find Usages
  * <li/> Rename/Move Refactor
  * <li/> Fragment support
- * <li/> Professional Template Authoring
+ * <li/> Unit Expressions
+ * <li/> Template Authoring
  * <li/> Incremental compilation
  * <li/> Hotswap debugging
  * <li/> etc.
@@ -377,6 +378,8 @@ public class RunMe {
 
   // manifold-ext dependency
   private static void useOperatorOverloading() {
+    out.println("\n\n### Use Operator Overloading ###\n");
+
     var a = new Foo(2);
     var b = new Foo(3);
 
@@ -400,6 +403,8 @@ public class RunMe {
 
   // manifold-ext dependency
   private static void useUnitExpressions() {
+    out.println("\n\n### Use Unit Expressions ###\n");
+
     // Conveniently use Rational, BigDecimal, etc. (CoercionConstants)
     Rational rational = 2.1r + 2.2r;
     BigDecimal result = 2.1bd + 2.2bd;
@@ -432,6 +437,8 @@ public class RunMe {
 
   // manifold-collections dependency
   private static void useRanges() {
+    out.println("\n\n### Use Ranges with `RangeFun` ###\n");
+
     // Work with ranges using binder constants from manifold.collections.api.range.RangeFun
 
     // Easily make ranges on sequential endpoints using 'to'
