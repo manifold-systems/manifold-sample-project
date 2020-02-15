@@ -219,9 +219,19 @@ public class RunMe {
 
   // via manifold-ext dependency
   private static void useCustomExtension() {
+    // echo() extension on String
     out.println("\n\n### Use Custom Extension Method ###\n");
     String hello = "hello";
     hello.echo();
+
+    // containsKey() extension on Map
+    HashMap<String, Integer> map = new HashMap<>() {{
+      put("one", 1);
+      put("two", 2);
+      put("three", 3);
+    }};
+    List<String> keys = Arrays.asList("one", "two");
+    out.println(map.containsKeys(keys));
   }
 
   // via manifold-collections dependency
