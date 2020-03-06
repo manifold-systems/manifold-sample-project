@@ -222,7 +222,7 @@ public class RunMe {
     hello.echo();
 
     // containsKey() extension on Map
-    HashMap<String, Integer> map = new HashMap<>() {{
+    HashMap<String, Integer> map = new HashMap<String, Integer>() {{
       put("one", 1);
       put("two", 2);
       put("three", 3);
@@ -387,11 +387,11 @@ public class RunMe {
   private static void useOperatorOverloading() {
     out.println("\n\n### Use Operator Overloading ###\n");
 
-    var a = new Foo(2);
-    var b = new Foo(3);
+    Foo a = new Foo(2);
+    Foo b = new Foo(3);
 
     // use '+' operator directly on Foo
-    var sum = a + b; // Foo(5)
+    Foo sum = a + b; // Foo(5)
     out.println(sum.x);
 
     // use relational operators
