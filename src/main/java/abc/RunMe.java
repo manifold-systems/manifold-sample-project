@@ -1,6 +1,7 @@
 package abc;
 
 import abc.res.*;
+import abc.res.Person;
 import abc.stuff.Car;
 import abc.stuff.CarBuilder;
 import abc.stuff.Coordinate;
@@ -167,7 +168,7 @@ public class RunMe {
     out.println("\n\n### Use GraphQL Schemas ###\n");
     // Create new data
     movies.Person steveMcQueen = movies.Person.builder("anId", "Steve McQueen", LocalDate.of(1930, 3, 24))
-      .withHeight(1.77)
+      .withHeight(5 ft + 10 in) // extension method
       .withNationality("American")
       .build();
     out.println(steveMcQueen.write().toJson());
@@ -229,6 +230,11 @@ public class RunMe {
     }};
     List<String> keys = Arrays.asList("one", "two");
     out.println(map.containsKeys(keys));
+
+    for( Map.Entry<String, Integer> entry: map.entrySet()) {
+      // demonstrates extension method on inner class
+      out.println(entry.hiFromEntry());
+    }
   }
 
   // via manifold-collections dependency
