@@ -222,7 +222,7 @@ public class RunMe {
     String hello = "hello";
     hello.echo();
 
-    // containsKey() extension on Map
+    // containsKeys() extension on Map
     HashMap<String, Integer> map = new HashMap<String, Integer>() {{
       put("one", 1);
       put("two", 2);
@@ -232,7 +232,7 @@ public class RunMe {
     out.println(map.containsKeys(keys));
 
     for( Map.Entry<String, Integer> entry: map.entrySet()) {
-      // demonstrates extension method on inner class
+      // hiFromEntry extension on inner type Map.Entry
       out.println(entry.hiFromEntry());
     }
   }
