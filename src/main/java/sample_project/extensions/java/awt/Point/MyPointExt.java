@@ -1,7 +1,7 @@
 package sample_project.extensions.java.awt.Point;
 
 import abc.stuff.Coordinate;
-import manifold.ext.api.Extension;
+import manifold.ext.rt.api.Extension;
 
 /**
  * Extend Point to implement Coordinate nominally

@@ -9,19 +9,120 @@
   <version>0.1-SNAPSHOT</version>
   
   <properties>
-    <manifold-version>2020.1.12</manifold-version>
+    <manifold-version>2020.1.13</manifold-version>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   
   <dependencies>
-    <!--Use all core Manifold features with 'manifold-all' -->
     <dependency>
       <groupId>systems.manifold</groupId>
-      <artifactId>manifold-all</artifactId>
+      <artifactId>manifold-graphql</artifactId>
+      <version>${manifold-version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-graphql-rt</artifactId>
       <version>${manifold-version}</version>
     </dependency>
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-xml</artifactId>
+      <version>${manifold-version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-xml-rt</artifactId>
+      <version>${manifold-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-yaml</artifactId>
+      <version>${manifold-version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-yaml-rt</artifactId>
+      <version>${manifold-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-csv</artifactId>
+      <version>${manifold-version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-csv-rt</artifactId>
+      <version>${manifold-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-exceptions</artifactId>
+      <version>${manifold-version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-image</artifactId>
+      <version>${manifold-version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-properties</artifactId>
+      <version>${manifold-version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-js</artifactId>
+      <version>${manifold-version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-js-rt</artifactId>
+      <version>${manifold-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-collections</artifactId>
+      <version>${manifold-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-preprocessor</artifactId>
+      <version>${manifold-version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-strings</artifactId>
+      <version>${manifold-version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-science</artifactId>
+      <version>${manifold-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-templates</artifactId>
+      <version>${manifold-version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-templates-rt</artifactId>
+      <version>${manifold-version}</version>
+    </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -57,7 +158,57 @@
             <annotationProcessorPaths>
               <path>
                 <groupId>systems.manifold</groupId>
-                <artifactId>manifold-all</artifactId>
+                <artifactId>manifold-graphql</artifactId>
+                <version>${manifold-version}</version>
+              </path>
+              <path>
+                <groupId>systems.manifold</groupId>
+                <artifactId>manifold-xml</artifactId>
+                <version>${manifold-version}</version>
+              </path>
+              <path>
+                <groupId>systems.manifold</groupId>
+                <artifactId>manifold-yaml</artifactId>
+                <version>${manifold-version}</version>
+              </path>
+              <path>
+                <groupId>systems.manifold</groupId>
+                <artifactId>manifold-csv</artifactId>
+                <version>${manifold-version}</version>
+              </path>
+              <path>
+                <groupId>systems.manifold</groupId>
+                <artifactId>manifold-exceptions</artifactId>
+                <version>${manifold-version}</version>
+              </path>
+              <path>
+                <groupId>systems.manifold</groupId>
+                <artifactId>manifold-image</artifactId>
+                <version>${manifold-version}</version>
+              </path>
+              <path>
+                <groupId>systems.manifold</groupId>
+                <artifactId>manifold-properties</artifactId>
+                <version>${manifold-version}</version>
+              </path>
+              <path>
+                <groupId>systems.manifold</groupId>
+                <artifactId>manifold-js</artifactId>
+                <version>${manifold-version}</version>
+              </path>
+              <path>
+                <groupId>systems.manifold</groupId>
+                <artifactId>manifold-preprocessor</artifactId>
+                <version>${manifold-version}</version>
+              </path>
+              <path>
+                <groupId>systems.manifold</groupId>
+                <artifactId>manifold-strings</artifactId>
+                <version>${manifold-version}</version>
+              </path>
+              <path>
+                <groupId>systems.manifold</groupId>
+                <artifactId>manifold-templates</artifactId>
                 <version>${manifold-version}</version>
               </path>
             </annotationProcessorPaths>

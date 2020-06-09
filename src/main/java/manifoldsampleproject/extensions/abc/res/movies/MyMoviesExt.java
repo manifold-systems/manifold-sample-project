@@ -1,8 +1,8 @@
 package manifoldsampleproject.extensions.abc.res.movies;
 
 import abc.res.movies; // note 'movies' is a class
-import manifold.ext.api.Extension;
-import manifold.ext.api.This;
+import manifold.ext.rt.api.Extension;
+import manifold.ext.rt.api.This;
 import manifold.science.measures.Length;
 import manifold.science.measures.LengthUnit;
 

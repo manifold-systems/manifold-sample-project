@@ -9,7 +9,7 @@ If you simply want to experiment with Manifold, this project will help get you s
 
 * `git clone https://github.com/manifold-systems/manifold-sample-project.git`
 * Open [IntelliJ IDEA](https://www.jetbrains.com/idea/download)
-* Install the **Manifold plugin** from within IntelliJ: `Settings | Plugins | Browse Repositories | Manifold`
+* Install the **Manifold plugin** from within IntelliJ: `Settings | Plugins | Marketplace`
 * Restart IntelliJ to use the plugin
 * Open the project you just cloned (open the root directory or the pom.xml file)
 * Add the [Java 11 JDK](https://adoptopenjdk.net/releases.html?variant=openjdk11&jvmVariant=hotspot): `File | Project Structure | SDKs | + | path-to-your-Jdk11`

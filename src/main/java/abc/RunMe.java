@@ -6,8 +6,8 @@ import abc.stuff.Car;
 import abc.stuff.CarBuilder;
 import abc.stuff.Coordinate;
 import abc.stuff.SampleClass;
-import manifold.ext.api.ComparableUsing;
-import manifold.ext.api.Jailbreak;
+import manifold.ext.rt.api.ComparableUsing;
+import manifold.ext.rt.api.Jailbreak;
 import manifold.science.measures.*;
 import manifold.science.util.Rational;
 
@@ -112,13 +112,13 @@ public class RunMe {
     address.setState("CA");
     out.println(person.write().toJson());
 
-    // Use the JSON sample *data* from Person.json itself types-safely
+    // Use the JSON sample *data* from Person.json itself type-safely
     Person p = Person.fromSource();
     out.println(p.getName());
     out.println(p.getAge());
   }
 
-  // via manifold-json dependencyr
+  // via manifold-json dependency
   private static void useJsonSchema() {
     out.println("\n\n### Use JSON Manifold With JSON Schema ###\n");
     Contact contact = Contact.builder()
@@ -248,7 +248,7 @@ public class RunMe {
   // via manifold-ext dependency
   private static void useStructuralInterface() {
     out.println("\n\n### Use Structural Interfaces ###\n");
-    // No casting necessary, Point indirectly implements Coordinate via extension (see MyPointExt)
+    // No casting necessary, Point indirectly implements Coordinate via extension (see MyPointExt).
     Coordinate coord = new Point(4, 5);
     out.println("x: " + coord.getX() + ", y: " + coord.getY());
 

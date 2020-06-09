@@ -1,6 +1,6 @@
 package abc.stuff;
 
-import manifold.ext.api.Self;
+import manifold.ext.rt.api.Self;
 
 public abstract class AbstractBuilder {
   String _name;
