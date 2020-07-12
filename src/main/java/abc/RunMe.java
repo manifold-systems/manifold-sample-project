@@ -6,6 +6,7 @@ import abc.stuff.Car;
 import abc.stuff.CarBuilder;
 import abc.stuff.Coordinate;
 import abc.stuff.SampleClass;
+import manifold.collections.api.range.IntegerRange;
 import manifold.ext.rt.api.ComparableUsing;
 import manifold.ext.rt.api.Jailbreak;
 import manifold.science.measures.*;
@@ -207,11 +208,25 @@ public class RunMe {
     */
 
     var query = MyQuery.Movies.builder().withGenre(Action).build();
-    out.println(query.toString());
-    // experimental
-    //    var q = "[>.graphql<] query MovieQuery($genre: Genre){ movies(genre: $genre){ genre } }";
-    //    var result = q.builder().build().request("").post();
-    //    result.getMovies().forEach( e -> e.getGenre() );
+    out.println(query.getGenre());
+
+  #if JAVA_14_OR_LATER
+    var moviesQuery = """
+    [>.graphql<]
+      query Movies($title: String, $genre: Genre, $releaseDate: Date) {
+          movies(title: $title, genre: $genre, releaseDate: $releaseDate) {
+              id
+              title
+              genre
+              releaseDate
+          }
+      }
+    """;
+    var actionMoviesQuery = moviesQuery.builder()
+            .withGenre(Action).build();
+    out.println(actionMoviesQuery.getGenre());
+    //actionMoviesQuery.request("https://com.example/movies/graphql").post();
+  #endif
   }
 #endif
 
@@ -459,6 +474,12 @@ public class RunMe {
       out.println(i);
     }
 
+    // Use with lambdas
+    (1 to 10).forEach(out::println);
+
+    // Strong typing
+    IntegerRange range = 1 to 10;
+
     // Reverse the endpoints
     for (int i : 10 to 1) {
       out.println(i);
@@ -469,7 +490,7 @@ public class RunMe {
       out.println(i);
     }
 
-    // Use variations of 'to' to exclude range endpoints
+    // Use variations of 'to' ('_to', '_to_', 'to_') to exclude range endpoints
     for (Rational i : 1r _to 10r) {
       out.println(i);
     }
