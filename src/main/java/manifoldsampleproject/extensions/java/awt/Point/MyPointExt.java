@@ -1,4 +1,4 @@
-package sample_project.extensions.java.awt.Point;
+package manifoldsampleproject.extensions.java.awt.Point;
 
 import abc.stuff.Coordinate;
 import manifold.ext.rt.api.Extension;
