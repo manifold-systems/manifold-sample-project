@@ -9,31 +9,21 @@
   <version>0.1-SNAPSHOT</version>
   
   <properties>
-    <manifold-version>2020.1.26</manifold-version>
+    <manifold-version>2020.1.27</manifold-version>
+<!-- Manifold supports Java versions 8 - 14 (current release)  -->
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
 <!-- Use this if compiling with Java 9 or later and targeting an older Java version  -->
-<!-- <maven.compiler.release>8</maven.compiler.release> -->
+<!-- <maven.compiler.release>6</maven.compiler.release> -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   
   <dependencies>
-    <dependency>
-      <groupId>systems.manifold</groupId>
-      <artifactId>manifold-graphql</artifactId>
-      <version>${manifold-version}</version>
-      <scope>provided</scope>
-    </dependency>
+<!-- Add relevant manifold runtime dependencies, compile-time dependencies are listed in annotationProcessorPath- -->
     <dependency>
       <groupId>systems.manifold</groupId>
       <artifactId>manifold-graphql-rt</artifactId>
       <version>${manifold-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>systems.manifold</groupId>
-      <artifactId>manifold-xml</artifactId>
-      <version>${manifold-version}</version>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>systems.manifold</groupId>
@@ -42,49 +32,13 @@
     </dependency>
     <dependency>
       <groupId>systems.manifold</groupId>
-      <artifactId>manifold-yaml</artifactId>
-      <version>${manifold-version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>systems.manifold</groupId>
       <artifactId>manifold-yaml-rt</artifactId>
       <version>${manifold-version}</version>
     </dependency>
     <dependency>
       <groupId>systems.manifold</groupId>
-      <artifactId>manifold-csv</artifactId>
-      <version>${manifold-version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>systems.manifold</groupId>
       <artifactId>manifold-csv-rt</artifactId>
       <version>${manifold-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>systems.manifold</groupId>
-      <artifactId>manifold-exceptions</artifactId>
-      <version>${manifold-version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>systems.manifold</groupId>
-      <artifactId>manifold-image</artifactId>
-      <version>${manifold-version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>systems.manifold</groupId>
-      <artifactId>manifold-properties</artifactId>
-      <version>${manifold-version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>systems.manifold</groupId>
-      <artifactId>manifold-js</artifactId>
-      <version>${manifold-version}</version>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>systems.manifold</groupId>
@@ -98,33 +52,15 @@
     </dependency>
     <dependency>
       <groupId>systems.manifold</groupId>
-      <artifactId>manifold-preprocessor</artifactId>
-      <version>${manifold-version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>systems.manifold</groupId>
-      <artifactId>manifold-strings</artifactId>
-      <version>${manifold-version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>systems.manifold</groupId>
       <artifactId>manifold-science</artifactId>
       <version>${manifold-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>systems.manifold</groupId>
-      <artifactId>manifold-templates</artifactId>
-      <version>${manifold-version}</version>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>systems.manifold</groupId>
       <artifactId>manifold-templates-rt</artifactId>
       <version>${manifold-version}</version>
     </dependency>
-
+<!-- For testing -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -137,10 +73,9 @@
     <plugins>
 
       <!--
-       *** JAVA 9+ ***
        Configure the maven-compiler-plugin use Manifold.
        - add the -Xplugin:Manifold argument for the javac compiler
-       - add the manifold-all module to javac -processorpath arg
+       - add compile-time manifold modules to javac -processorpath arg
       -->
        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -156,7 +91,7 @@
               <arg>-Xplugin:Manifold</arg>
             </compilerArgs>
 
-            <!-- Add the processor path for the plugin (required for Java 9+ -->
+            <!-- Add Manifold compile-time dependencies in the processor path -->
             <annotationProcessorPaths>
               <path>
                 <groupId>systems.manifold</groupId>
@@ -217,53 +152,6 @@
 
           </configuration>
         </plugin>
-
-
-      <!-- *** JAVA 8 ***
-
-       Configure the maven-compiler-plugin use Manifold.
-       - add the -Xplugin:Manifold argument for the javac compiler
-      -->
-      <!-- Uncomment this <plugin> entry to use JAVA 8 (don't forget to comment out the other Java 9 <plugin> entry)
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.0</version>
-          <configuration>
-            <encoding>UTF-8</encoding>
-            <compilerArgs>
-              <arg>-Xplugin:Manifold</arg>
-            </compilerArgs>
-          </configuration>
-        </plugin>
-
-      -->
-      
     </plugins>
-
   </build>
-
-<!--  *** JAVA 8 ***
-
-  <profiles>
-    <profile>
-      <id>internal.tools-jar</id>
-      <activation>
-        <file>
-          <exists>${java.home}/../lib/tools.jar</exists>
-        </file>
-      </activation>
-      <dependencies>
-        <dependency>
-          <groupId>com.sun</groupId>
-          <artifactId>tools</artifactId>
-          <version>1.8.0</version>
-          <scope>system</scope>
-          <systemPath>${java.home}/../lib/tools.jar</systemPath>
-        </dependency>
-      </dependencies>
-    </profile>
-  </profiles>
--->
-
 </project>
