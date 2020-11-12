@@ -210,7 +210,7 @@ public class RunMe {
     var query = MyQuery.Movies.builder().withGenre(Action).build();
     out.println(query.getGenre());
 
-  #if JAVA_14_OR_LATER
+  #if JAVA_15_OR_LATER
     var moviesQuery = """
     [>.graphql<]
       query Movies($title: String, $genre: Genre, $releaseDate: Date) {
@@ -224,8 +224,15 @@ public class RunMe {
     """;
     var actionMoviesQuery = moviesQuery.builder()
             .withGenre(Action).build();
-    out.println(actionMoviesQuery.getGenre());
-    //actionMoviesQuery.request("https://com.example/movies/graphql").post();
+//    var result = actionMoviesQuery.request("https://com.example/movies/graphql").post();
+//    for (var movie : result.getMovies()) {
+//      out.println("""
+//        Title: ${movie.getTitle()}
+//        Genre: ${movie.getGenre()}
+//        Year: ${movie.getReleaseDate().getYear()}
+//        """);
+//    }
+
   #endif
   }
 #endif
@@ -427,6 +434,11 @@ public class RunMe {
     BigDecimal result = 2.1bd * 3.2bd;
     out.println(2.1bd < 3.2bd);
     out.println(2.1bd == 2.1bd);
+
+    // Use convenient index operator with Map, List, etc.
+    Map<String, String> map = new HashMap<>();
+    map["color"] = "Red";
+    map["shape"] = "Round";
   }
 
   // manifold-ext dependency

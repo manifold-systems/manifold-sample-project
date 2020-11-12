@@ -13,7 +13,6 @@ public class MyMapExtension {
     return thiz.keySet().containsAll(keys);
   }
 
-  @Extension
   public static class Entry {
     public static <K, V> String hiFromEntry(@This Map.Entry<K, V> thiz) {
       return "hiFromEntry";
