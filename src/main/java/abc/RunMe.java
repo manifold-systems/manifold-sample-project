@@ -126,7 +126,7 @@ public class RunMe {
       .withName("Scott McKinney")
       .withDateOfBirth(LocalDate.of(1986, 8, 9))
       .withPrimaryAddress(Contact.Address.create("111 Main St.", "Cupertino", "CA"))
-      .withContactAddresses(Arrays.asList(Contact.Address.create("a", "b", "c")))
+      .withContactAddresses(Collections.singletonList(Contact.Address.create("a", "b", "c")))
       .build();
     out.println(contact.write().toJson());
   }
@@ -159,7 +159,7 @@ public class RunMe {
       .withName("Scott McKinney")
       .withDateOfBirth(LocalDate.of(1986, 8, 9))
       .withPrimaryAddress(Contact2.Address.create("111 Main St.", "Cupertino", "CA"))
-      .withContactAddresses(Arrays.asList(Contact2.Address.create("a", "b", "c")))
+      .withContactAddresses(Collections.singletonList(Contact2.Address.create("a", "b", "c")))
       .build();
     out.println(contact.write().toJson());
   }
@@ -245,7 +245,7 @@ public class RunMe {
     hello.echo();
 
     // containsKeys() extension on Map
-    HashMap<String, Integer> map = new HashMap<String, Integer>() {{
+    HashMap<String, Integer> map = new HashMap<>() {{
       put("one", 1);
       put("two", 2);
       put("three", 3);
