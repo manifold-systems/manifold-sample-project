@@ -16,12 +16,14 @@ import static manifold.collections.api.range.RangeFun.*;
 import static manifold.science.measures.MetricScaleUnit.M;
 import static manifold.science.util.UnitConstants.*;
 import static manifold.science.util.CoercionConstants.*;
+import static manifold.rt.api.util.Pair.and;
 
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.chrono.ChronoLocalDateTime;
@@ -265,6 +267,10 @@ public class RunMe {
     Iterable<Integer> list = Arrays.asList(1, 2, 3);
     out.println(list.first());
     out.println(list.joinToString(", "));
+
+    // Simplified Map construction (mapOf extension and the Pair.and binding constant)
+    Map<String, Integer> map = Map.mapOf("Moe" and 88, "Larry" and 99, "Curly" and 100);
+    out.println(map.get("Moe"));
   }
 
   // via manifold-ext dependency
@@ -280,7 +286,8 @@ public class RunMe {
 
     // Use a registered IProxyFactory interface to make old Date structurally compatible with new ChronoLocalDateTime
     // See Date_To_ChronoLocalDateTime and MyChronoLocalDateTimeExt
-    Date date = new Date(82, Calendar.JULY, 4);
+    Date date = Date.from(Instant.now());
+    //noinspection rawtypes
     out.println(((ChronoLocalDateTime) date).plus(1, ChronoUnit.MONTHS));
   }
 
@@ -343,13 +350,17 @@ public class RunMe {
   }
 
   private static void boom() throws IOException {
+    //noinspection ConstantConditions
     if (false)
       throw new IOException();
   }
 
+  @SuppressWarnings("unused")
   private static void freedom() {
+    //noinspection ConstantConditions
     if (false)
-      throw new IOException(); // w/o the manifold-exceptions dependency this would have a compile error
+      // w/o the manifold-exceptions dependency this would have a compile error
+      throw new IOException();
   }
 
   // via manifold-js dependency
@@ -412,6 +423,7 @@ public class RunMe {
 #endif
 
   // manifold-ext dependency
+  @SuppressWarnings("unused")
   private static void useOperatorOverloading() {
     out.println("\n\n### Use Operator Overloading ###\n");
 
@@ -427,7 +439,7 @@ public class RunMe {
       out.println("a < b");
     }
     // map '==' to compareTo()
-    if (a == new Foo(2)) {
+    if (a == sum - b) {
       out.println(":)");
     }
     // Use operators on BigDecimal
@@ -442,6 +454,7 @@ public class RunMe {
   }
 
   // manifold-ext dependency
+  @SuppressWarnings("unused")
   private static void useUnitExpressions() {
     out.println("\n\n### Use Unit Expressions ###\n");
 
@@ -476,6 +489,7 @@ public class RunMe {
   }
 
   // manifold-collections dependency
+  @SuppressWarnings("unused")
   private static void useRanges() {
     out.println("\n\n### Use Ranges with `RangeFun` ###\n");
 
@@ -531,8 +545,17 @@ public class RunMe {
     /**
      * implement '+' operator
      */
+    @SuppressWarnings("unused")
     public Foo plus(Foo that) {
       return new Foo(x + that.x);
+    }
+
+    /**
+     * implement '-' operator
+     */
+    @SuppressWarnings("unused")
+    public Foo minus(Foo that) {
+      return new Foo(x - that.x);
     }
 
     /**
