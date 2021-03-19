@@ -374,15 +374,15 @@ public class RunMe {
     out.println(BasicJavascriptProgram.identity("Foo"));
     out.println(BasicJavascriptProgram.identity(1));
 
-    // Use a *class*
-    MyClass myClass = new MyClass("foo", 5);
-    out.println(myClass.getFoo());
-    out.println(myClass.getBar());
-    myClass.setFoo("foo2");
-    myClass.setBar(6);
-    out.println(myClass.getFoo());
-    out.println(myClass.getBar());
-    out.println(MyClass.somethingStatic());
+//    // Use a *class*
+//    MyClass myClass = new MyClass("foo", 5);
+//    out.println(myClass.getFoo());
+//    out.println(myClass.getBar());
+//    myClass.setFoo("foo2");
+//    myClass.setBar(6);
+//    out.println(myClass.getFoo());
+//    out.println(myClass.getBar());
+//    out.println(MyClass.somethingStatic());
   }
 
 #if EXPERIMENTAL
