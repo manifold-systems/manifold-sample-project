@@ -117,10 +117,6 @@ public class RunMe {
     // access inferred properties: hour, minute, second, nano
     LocalTime hourLater = LocalTime.of(t.hour+1, t.minute, t.second, t.nano);
     out.println( hourLater );
-
-    // for fun, this is a Unit Expression accomplishing the same thing
-    hourLater = t + 1hr;
-    out.println( hourLater );
   }
 
   // via manifold-image dependency
