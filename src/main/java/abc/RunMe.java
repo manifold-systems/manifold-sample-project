@@ -7,6 +7,9 @@ import abc.stuff.CarBuilder;
 import abc.stuff.Coordinate;
 import abc.stuff.SampleClass;
 import manifold.collections.api.range.IntegerRange;
+import manifold.ext.props.rt.api.override;
+import manifold.ext.props.rt.api.val;
+import manifold.ext.props.rt.api.var;
 import manifold.ext.rt.api.ComparableUsing;
 import manifold.ext.rt.api.Jailbreak;
 import manifold.science.measures.*;
@@ -80,12 +83,44 @@ public class RunMe {
     useOperatorOverloading();
     useUnitExpressions();
     useRanges();
+    useExplicitProperties();
+    useInferredProperties();
 
     #if EXPERIMENTAL
     useJsonFragment();
     useGraphQLFragment();
     useJavascriptFragment();
     #endif
+  }
+
+  public interface Book {
+    @val int id;
+    @var String title;
+  }
+  static class BookImpl implements Book {
+    @override @val int id = (int) (Math.random() * 1_000_000);
+    @override @var String title;
+  }
+  private static void useExplicitProperties() {
+    out.println("\n\n### Use manifold-props explicit properties ###\n");
+    Book book = new BookImpl();
+    book.title = "Chain";
+    out.println(book.id + ": " + book.title);
+    book.title += " of Command";
+    out.println(book.title);
+  }
+
+  private static void useInferredProperties() {
+    out.println("\n\n### Use manifold-props inferred properties ###\n");
+    LocalTime t = LocalTime.now();
+
+    // access inferred properties: hour, minute, second, nano
+    LocalTime hourLater = LocalTime.of(t.hour+1, t.minute, t.second, t.nano);
+    out.println( hourLater );
+
+    // for fun, this is a Unit Expression accomplishing the same thing
+    hourLater = t + 1hr;
+    out.println( hourLater );
   }
 
   // via manifold-image dependency

@@ -6,6 +6,7 @@ module manifold.sample.project {
   requires manifold.util;
   requires manifold.rt;
   requires manifold.ext.rt;
+  requires manifold.props.rt;
   requires manifold.graphql.rt;
   requires manifold.json.rt;
   requires manifold.xml.rt;
