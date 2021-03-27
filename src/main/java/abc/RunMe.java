@@ -115,8 +115,8 @@ public class RunMe {
     LocalTime t = LocalTime.now();
 
     // access inferred properties: hour, minute, second, nano
-    LocalTime hourLater = LocalTime.of(t.hour+1, t.minute, t.second, t.nano);
-    out.println( hourLater );
+    t = LocalTime.of(t.hour, t.minute, t.second, t.nano);
+    out.println( t );
   }
 
   // via manifold-image dependency
