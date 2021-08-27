@@ -114,9 +114,9 @@ public class RunMe {
     out.println("\n\n### Use manifold-props inferred properties ###\n");
     LocalTime t = LocalTime.now();
 
-    // access inferred properties: hour, minute, second, nano
-    t = LocalTime.of(t.hour, t.minute, t.second, t.nano);
-    out.println( t );
+//    // access inferred properties: hour, minute, second, nano
+//    t = LocalTime.of(t.hour, t.minute, t.second, t.nano);
+//    out.println( t );
   }
 
   // via manifold-image dependency
