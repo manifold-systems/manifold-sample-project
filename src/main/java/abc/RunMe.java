@@ -12,6 +12,8 @@ import manifold.ext.props.rt.api.val;
 import manifold.ext.props.rt.api.var;
 import manifold.ext.rt.api.ComparableUsing;
 import manifold.ext.rt.api.Jailbreak;
+import manifold.ext.rt.api.Structural;
+import manifold.json.rt.api.DataBindings;
 import manifold.science.measures.*;
 import manifold.science.util.Rational;
 
@@ -32,6 +34,7 @@ import java.time.LocalTime;
 import java.time.chrono.ChronoLocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static abc.res.movies.Genre.Action;
@@ -66,7 +69,7 @@ import static java.lang.System.out;
 public class RunMe {
   public static void main(String[] args) {
     useImage();
-    useProperties();
+    usePropertiesFiles();
     useJsonSample();
     useJsonSchema();
     useYamlUsingJsonSchema();
@@ -114,9 +117,9 @@ public class RunMe {
     out.println("\n\n### Use manifold-props inferred properties ###\n");
     LocalTime t = LocalTime.now();
 
-//    // access inferred properties: hour, minute, second, nano
-//    t = LocalTime.of(t.hour, t.minute, t.second, t.nano);
-//    out.println( t );
+    // access inferred properties: hour, minute, second, nano
+    t = LocalTime.of(t.hour, t.minute, t.second, t.nano);
+    out.println( t );
   }
 
   // via manifold-image dependency
@@ -127,7 +130,7 @@ public class RunMe {
   }
 
   // via manifold-properties dependency
-  private static void useProperties() {
+  private static void usePropertiesFiles() {
     out.println("\n\n### Use Properties Manifold ###\n");
     out.println(MyProperties.Chocolate);
     out.println(MyProperties.Chocolate.dark);
@@ -320,6 +323,36 @@ public class RunMe {
     Date date = Date.from(Instant.now());
     //noinspection rawtypes
     out.println(((ChronoLocalDateTime) date).plus(1, ChronoUnit.MONTHS));
+
+    // Use a Map to directly back any interface
+    Dog dog = (Dog)new HashMap<>();
+    dog.setBreed("Black Mouth Cur");
+    ((Map)dog).put("likes", (Function<String,Boolean>)(thing -> !thing.equals("cat")));
+    String breed = dog.getBreed();
+    out.println(dog.likes("ball"));
+    out.println(dog.likes("cat"));
+
+    Bog bog = new Bog();
+    Dog hi = bog.bog();
+    hi.other = (Dog)new DataBindings();
+    Dog other = hi.getOther();
+    out.println(hi.breed);
+  }
+  @Structural
+  interface Dog {
+    String getBreed();
+    void setBreed(String breed);
+    Dog getOther();
+    void setOther(Dog other);
+    default boolean likes(String thing) {
+      return true;
+    }
+  }
+
+  static class Bog {
+    Dog bog() {
+      return (Dog)new HashMap();
+    }
   }
 
   // via manifold-ext dependency
