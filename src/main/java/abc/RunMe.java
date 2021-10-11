@@ -13,7 +13,6 @@ import manifold.ext.props.rt.api.var;
 import manifold.ext.rt.api.ComparableUsing;
 import manifold.ext.rt.api.Jailbreak;
 import manifold.ext.rt.api.Structural;
-import manifold.json.rt.api.DataBindings;
 import manifold.science.measures.*;
 import manifold.science.util.Rational;
 
@@ -77,6 +76,7 @@ public class RunMe {
     useCustomExtension();
     useProvidedExtension();
     useStructuralInterface();
+    useMapStructuralInterface();
     useSelfType();
     useJailbreak();
     useCheckedExceptionSuppression();
@@ -104,6 +104,7 @@ public class RunMe {
     @override @val int id = (int) (Math.random() * 1_000_000);
     @override @var String title;
   }
+  // via manifold-props dependency
   private static void useExplicitProperties() {
     out.println("\n\n### Use manifold-props explicit properties ###\n");
     Book book = new BookImpl();
@@ -112,7 +113,7 @@ public class RunMe {
     book.title += " of Command";
     out.println(book.title);
   }
-
+  // via manifold-props dependency
   private static void useInferredProperties() {
     out.println("\n\n### Use manifold-props inferred properties ###\n");
     LocalTime t = LocalTime.now();
@@ -131,7 +132,7 @@ public class RunMe {
 
   // via manifold-properties dependency
   private static void usePropertiesFiles() {
-    out.println("\n\n### Use Properties Manifold ###\n");
+    out.println("\n\n### Use Properties Files ###\n");
     out.println(MyProperties.Chocolate);
     out.println(MyProperties.Chocolate.dark);
     out.println(MyProperties.Chocolate.milk);
@@ -260,6 +261,7 @@ public class RunMe {
     """;
     var actionMoviesQuery = moviesQuery.builder()
             .withGenre(Action).build();
+// Need a server to field this request, see the GraphQL Sample Application
 //    var result = actionMoviesQuery.request("https://com.example/movies/graphql").post();
 //    for (var movie : result.getMovies()) {
 //      out.println("""
@@ -323,35 +325,26 @@ public class RunMe {
     Date date = Date.from(Instant.now());
     //noinspection rawtypes
     out.println(((ChronoLocalDateTime) date).plus(1, ChronoUnit.MONTHS));
+  }
 
+  // via manifold-ext dependency
+  private static void useMapStructuralInterface() {
+    out.println("\n\n### Use Maps with Structural Interfaces ###\n");
     // Use a Map to directly back any interface
     Dog dog = (Dog)new HashMap<>();
-    dog.setBreed("Black Mouth Cur");
-    ((Map)dog).put("likes", (Function<String,Boolean>)(thing -> !thing.equals("cat")));
+    dog.setBreed("Foxhound");
+    ((Map)dog).put("likes", (Function<String,Boolean>)(thing -> !thing.equals("relaxation")));
     String breed = dog.getBreed();
+    out.println(breed);
     out.println(dog.likes("ball"));
-    out.println(dog.likes("cat"));
-
-    Bog bog = new Bog();
-    Dog hi = bog.bog();
-    hi.other = (Dog)new DataBindings();
-    Dog other = hi.getOther();
-    out.println(hi.breed);
+    out.println(dog.likes("relaxation"));
   }
   @Structural
   interface Dog {
     String getBreed();
     void setBreed(String breed);
-    Dog getOther();
-    void setOther(Dog other);
     default boolean likes(String thing) {
       return true;
-    }
-  }
-
-  static class Bog {
-    Dog bog() {
-      return (Dog)new HashMap();
     }
   }
 
@@ -438,15 +431,15 @@ public class RunMe {
     out.println(BasicJavascriptProgram.identity("Foo"));
     out.println(BasicJavascriptProgram.identity(1));
 
-//    // Use a *class*
-//    MyClass myClass = new MyClass("foo", 5);
-//    out.println(myClass.getFoo());
-//    out.println(myClass.getBar());
-//    myClass.setFoo("foo2");
-//    myClass.setBar(6);
-//    out.println(myClass.getFoo());
-//    out.println(myClass.getBar());
-//    out.println(MyClass.somethingStatic());
+    // Use a *class*
+    MyClass myClass = new MyClass("foo", 5);
+    out.println(myClass.getFoo());
+    out.println(myClass.getBar());
+    myClass.setFoo("foo2");
+    myClass.setBar(6);
+    out.println(myClass.getFoo());
+    out.println(myClass.getBar());
+    out.println(MyClass.somethingStatic());
   }
 
 #if EXPERIMENTAL
