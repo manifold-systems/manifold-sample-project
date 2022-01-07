@@ -24,6 +24,10 @@ public interface Coordinate {
    * Java 8; and the cost of initialization time for each new proxy type to generate and compile. Here, since we know
    * ahead of time we are using Point and Rectangle in the RunMe class, we opt to implement the proxies statically right
    * here.
+   * <p/>
+   * Another option involves implementing Coordinate via Extension Classes. As such, abstract extension classes for
+   * Point and Shape would each declare they implement Coordinate and provide static extension methods for getX() and
+   * getY(). In this case proxy factory classes are generated automatically at compile-time.
    */
   class ProxyFactory implements IProxyFactory<Object, Coordinate> {
     @Override
