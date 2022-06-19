@@ -13,6 +13,7 @@ import manifold.ext.props.rt.api.var;
 import manifold.ext.rt.api.ComparableUsing;
 import manifold.ext.rt.api.Jailbreak;
 import manifold.ext.rt.api.Structural;
+import manifold.ext.rt.api.auto;
 import manifold.science.measures.*;
 import manifold.science.util.Rational;
 
@@ -73,6 +74,7 @@ public class RunMe {
     useJsonSchema();
     useYamlUsingJsonSchema();
     useGraphQL();
+    useCsv();
     useCustomExtension();
     useProvidedExtension();
     useStructuralInterface();
@@ -88,6 +90,9 @@ public class RunMe {
     useRanges();
     useExplicitProperties();
     useInferredProperties();
+    useMultipleReturnValues();
+    useAutoTypeInference();
+    useTupleExpressions();
 
     #if EXPERIMENTAL
     useJsonFragment();
@@ -126,7 +131,7 @@ public class RunMe {
   // via manifold-image dependency
   private static void useImage() {
     out.println("\n\n### Use Image Manifold ###\n");
-    logo_png logoImage = logo_png.get();
+    var logoImage = logo_png.get();
     out.println(logoImage.getIconWidth());
   }
 
@@ -274,6 +279,43 @@ public class RunMe {
   #endif
   }
 #endif
+
+  // via manifold-csv
+  public static void useCsv() {
+    out.println("\n\n### Use CSV resource ###\n");
+    for (TestData.TestDataItem item : TestData.fromSource()) {
+      System.out.println("${item.first} ${item.second} ${item.third}");
+    }
+  }
+
+  private static void useAutoTypeInference() {
+    out.println("\n\n### Use `auto` return type inference ###\n");
+    var printer = getPrinter("hello");
+    printer.run();
+    out.println(printer.chars); // anonymous type's chars field
+  }
+
+  static auto getPrinter(String message) {
+    return new Runnable() {
+      int chars;
+      public void run() {
+        out.println(message);
+        chars = message.length();
+      }
+    };
+  }
+
+  private static void useTupleExpressions() {
+    out.println("\n\n### Use tuple expressions ###\n");
+
+    // type-safe & lightweight name/value structures
+    var t = (name: "Bob", age: "35");
+    System.out.println("Name: ${t.name} Age: ${t.age}");
+
+    // names are inferred
+    var t2 = (t.name, t.age);
+    System.out.println("Name: ${t2.name} Age: ${t2.age}");
+  }
 
   // via manifold-ext dependency
   private static void useCustomExtension() {
@@ -498,6 +540,7 @@ public class RunMe {
     Map<String, String> map = new HashMap<>();
     map["color"] = "Red";
     map["shape"] = "Round";
+    out.println("" + map["shape"]);
   }
 
   // manifold-ext dependency
@@ -577,6 +620,25 @@ public class RunMe {
     if ("le matos" inside "a" to "m~") {
       out.println("le matos");
     }
+  }
+
+  private static void useMultipleReturnValues()
+  {
+    out.println("\n\n### Use multiple return values ###\n");
+
+    var result = findMinMax( new int[]{1, 2, 3} );
+    System.out.println( "Minimum: " + result.min + " Maximum: " + result.max );
+  }
+
+  static auto findMinMax(int[] data) {
+    if(data == null || data.length == 0) return null;
+    int min = Integer.MAX_VALUE;
+    int max = Integer.MIN_VALUE;
+    for(int i: data) {
+      if(i < min) min = i;
+      if(i > max) max = i;
+    }
+    return min, max; // return multiple values
   }
 
   /**
