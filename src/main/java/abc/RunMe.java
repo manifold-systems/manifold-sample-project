@@ -2,10 +2,7 @@ package abc;
 
 import abc.res.*;
 import abc.res.Person;
-import abc.stuff.Car;
-import abc.stuff.CarBuilder;
-import abc.stuff.Coordinate;
-import abc.stuff.SampleClass;
+import abc.stuff.*;
 import manifold.collections.api.range.IntegerRange;
 import manifold.ext.props.rt.api.override;
 import manifold.ext.props.rt.api.val;
