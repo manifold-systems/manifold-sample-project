@@ -42,19 +42,22 @@ import static java.lang.System.out;
 #undef EXPERIMENTAL // comment out this #undef to test experimental features
 
 /**
- * Utilize a small sampling of core Manifold features to demonstrate the
- * structure of a basic project using Manifold. Use the pom.xml file as a
- * template for your own project.
+ * Utilize a sampling of core Manifold features to demonstrate the
+ * structure of a single module project using Manifold. Use the pom.xml
+ * file as a template for your own project.
  * <p/>
  * Play with this in IntelliJ IDEA using the <b>Manifold</b> plugin:
  * <pre>
  * Settings | Plugins | Marketplace | search: 'Manifold'
  * </pre>
- * Use IntelliJ features such as: <ul>
+ * Use IntelliJ plugin features such as: <ul>
  * <li/> Navigation
  * <li/> Code completion
  * <li/> Find Usages
  * <li/> Rename/Move Refactor
+ * <li/> Type-safe GraphQL, JSON, XML, CSV, etc.
+ * <li/> Properties
+ * <li/> Tuples
  * <li/> Fragment support
  * <li/> Unit Expressions
  * <li/> Template Authoring
