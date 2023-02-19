@@ -7,6 +7,7 @@ module manifold.sample.project {
   requires manifold.rt;
   requires manifold.ext.rt;
   requires manifold.props.rt;
+  requires manifold.delegation.rt;
   requires manifold.tuple.rt;
   requires manifold.graphql.rt;
   requires manifold.json.rt;

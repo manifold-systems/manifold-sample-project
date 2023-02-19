@@ -9,7 +9,7 @@
   <version>0.1-SNAPSHOT</version>
   
   <properties>
-    <manifold-version>2022.1.38</manifold-version>
+    <manifold-version>2023.1.3</manifold-version>
 <!-- Manifold supports Java versions 8 - 16 (current release)  -->
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
@@ -20,6 +20,11 @@
   
   <dependencies>
 <!-- Add relevant manifold runtime dependencies, compile-time dependencies are listed in annotationProcessorPath- -->
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-delegation-rt</artifactId>
+      <version>${manifold-version}</version>
+    </dependency>
     <dependency>
       <groupId>systems.manifold</groupId>
       <artifactId>manifold-props-rt</artifactId>
@@ -103,6 +108,11 @@
 
             <!-- Add Manifold compile-time dependencies in the processor path -->
             <annotationProcessorPaths>
+              <path>
+                <groupId>systems.manifold</groupId>
+                <artifactId>manifold-delegation</artifactId>
+                <version>${manifold-version}</version>
+              </path>
               <path>
                 <groupId>systems.manifold</groupId>
                 <artifactId>manifold-props</artifactId>

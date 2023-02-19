@@ -93,6 +93,7 @@ public class RunMe {
     useMultipleReturnValues();
     useAutoTypeInference();
     useTupleExpressions();
+    useDelegation();
 
     #if EXPERIMENTAL
     useJsonFragment();
@@ -315,6 +316,11 @@ public class RunMe {
     // names are inferred
     var t2 = (t.name, t.age);
     System.out.println("Name: ${t2.name} Age: ${t2.age}");
+  }
+
+  // via manifold-delegation
+  private static void useDelegation() {
+    DelegationExample.main(null);
   }
 
   // via manifold-ext dependency
