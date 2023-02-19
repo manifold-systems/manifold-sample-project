@@ -320,6 +320,8 @@ public class RunMe {
 
   // via manifold-delegation
   private static void useDelegation() {
+    out.println("\n\n### Use Delegation ###\n");
+
     DelegationExample.main(null);
   }
 
