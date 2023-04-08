@@ -9,7 +9,7 @@
   <version>0.1-SNAPSHOT</version>
   
   <properties>
-    <manifold-version>2023.1.4</manifold-version>
+    <manifold-version>2023.1.5</manifold-version>
 <!-- Manifold supports Java versions 8 - 16 (current release)  -->
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
