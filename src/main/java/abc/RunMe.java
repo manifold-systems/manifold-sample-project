@@ -29,11 +29,11 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.chrono.ChronoLocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static java.time.temporal.ChronoUnit.MONTHS;
 import static abc.res.movies.Genre.Action;
 import static java.lang.System.out;
 
@@ -374,7 +374,7 @@ public class RunMe {
     // See Date_To_ChronoLocalDateTime and MyChronoLocalDateTimeExt
     Date date = Date.from(Instant.now());
     //noinspection rawtypes
-    out.println(((ChronoLocalDateTime) date).plus(1, ChronoUnit.MONTHS));
+    out.println(((ChronoLocalDateTime) date).plus(1, MONTHS));
   }
 
   // via manifold-ext dependency
@@ -543,6 +543,8 @@ public class RunMe {
     BigDecimal result = 2.1bd * 3.2bd;
     out.println(2.1bd < 3.2bd);
     out.println(2.1bd == 2.1bd);
+
+    out.println(1bd/3bd);
 
     // Use convenient index operator with Map, List, etc.
     Map<String, String> map = new HashMap<>();
