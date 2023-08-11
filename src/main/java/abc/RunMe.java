@@ -31,7 +31,6 @@ import java.time.LocalTime;
 import java.time.chrono.ChronoLocalDateTime;
 import java.util.*;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import static java.time.temporal.ChronoUnit.MONTHS;
 import static abc.res.movies.Genre.Action;
@@ -178,7 +177,7 @@ public class RunMe {
   // via manifold-json dependency
   private static void useJsonFragment() {
     out.println("\n\n### Use Json Fragment ###\n");
-    /*[>Dude.json<] {
+    /*[Dude.json/] {
       "Name": "Scott",
       "Age": 100,
       "Address": {
@@ -239,7 +238,7 @@ public class RunMe {
 
     // Note get the JS GraphQL IntelliJ plugin for rich editing of embedded GraphQL fragments
 
-    /*[>MyQuery.graphql<]
+    /*[MyQuery.graphql/]
     query Movies($title: String, $genre: Genre, $releaseDate: Date) {
         movies(title: $title, genre: $genre, releaseDate: $releaseDate) {
             id
@@ -255,7 +254,7 @@ public class RunMe {
 
   #if JAVA_15_OR_LATER
     var moviesQuery = """
-    [>.graphql<]
+    [.graphql/]
       query Movies($title: String, $genre: Genre, $releaseDate: Date) {
           movies(title: $title, genre: $genre, releaseDate: $releaseDate) {
               id
@@ -451,7 +450,7 @@ public class RunMe {
   private static void useCheckedExceptionSuppression() {
     out.println("\n\n### Use Checked Exception Suppression ###\n");
     java.util.List<String> list = Arrays.asList("http://manifold.systems", "https://github.com/manifold-systems/manifold");
-    List<URL> urls = list.map(URL::new).collect(Collectors.toList()); // w/o suppression, this would have compile errors
+    List<URL> urls = list.map(URL::new).toList(); // w/o suppression, this would have compile errors
     urls.forEach(out::println);
     boom(); // w/o suppression, this would have a compile error
   }
@@ -489,7 +488,7 @@ public class RunMe {
 
     // Embedded fragment (requires IJ Ultimate Edition for JS code injection editing)
 
-    /*[>Sample.js<]
+    /*[Sample.js/]
     function total(list) {
       return reduce(list, (sum, entry) => {
         return sum + entry.intValue();
@@ -514,7 +513,7 @@ public class RunMe {
     out.println("Max: " + Sample.max(Arrays.asList(1, 2, 3)));
 
     // Fragment *evaluation* from String literal (experimental)
-    //var value = (int) "[>.js<] 3 + 4 + 5";
+    //var value = (int) "[.js/] 3 + 4 + 5";
     //out.println(value);
   }
 #endif
@@ -524,11 +523,11 @@ public class RunMe {
   private static void useOperatorOverloading() {
     out.println("\n\n### Use Operator Overloading ###\n");
 
-    Foo a = new Foo(2);
-    Foo b = new Foo(3);
+    MyClass a = new MyClass(2);
+    MyClass b = new MyClass(3);
 
     // use '+' operator directly on Foo
-    Foo sum = a + b; // Foo(5)
+    MyClass sum = a + b; // Foo(5)
     out.println(sum.x);
 
     // use relational operators
@@ -550,7 +549,7 @@ public class RunMe {
     Map<String, String> map = new HashMap<>();
     map["color"] = "Red";
     map["shape"] = "Round";
-    out.println("" + map["shape"]);
+    out.println(map["shape"]);
   }
 
   // manifold-ext dependency
@@ -654,10 +653,10 @@ public class RunMe {
   /**
    * Implements operator methods
    */
-  public static class Foo implements ComparableUsing<Foo> {
+  public static class MyClass implements ComparableUsing<MyClass> {
     public final int x;
 
-    public Foo(int x) {
+    public MyClass(int x) {
       this.x = x;
     }
 
@@ -665,23 +664,23 @@ public class RunMe {
      * implement '+' operator
      */
     @SuppressWarnings("unused")
-    public Foo plus(Foo that) {
-      return new Foo(x + that.x);
+    public MyClass plus(MyClass that) {
+      return new MyClass(x + that.x);
     }
 
     /**
      * implement '-' operator
      */
     @SuppressWarnings("unused")
-    public Foo minus(Foo that) {
-      return new Foo(x - that.x);
+    public MyClass minus(MyClass that) {
+      return new MyClass(x - that.x);
     }
 
     /**
      * ComparableUsing delegates to compareTo() for >, >=, <, <=
      */
     @Override
-    public int compareTo(Foo that) {
+    public int compareTo(MyClass that) {
       return x - that.x;
     }
 

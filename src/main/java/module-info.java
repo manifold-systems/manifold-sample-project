@@ -22,6 +22,11 @@ module manifold.sample.project {
   requires java.desktop;
   requires jdk.unsupported;
 
+//// for manifold-sql-rt (EA):
+//  requires manifold.sql.rt;
+//  requires java.sql;
+//  opens config; // allow dbconfig resource to be accessed
+
   // Register the sample Date proxy factory service implementation
   // (note the META-INF/services registration is still necessary for Java 8 and Java 9+ unnamed-module)
   provides manifold.ext.rt.api.IProxyFactory
