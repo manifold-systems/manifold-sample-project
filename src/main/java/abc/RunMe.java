@@ -513,8 +513,8 @@ public class RunMe {
     out.println("Max: " + Sample.max(Arrays.asList(1, 2, 3)));
 
     // Fragment *evaluation* from String literal (experimental)
-    //var value = (int) "[.js/] 3 + 4 + 5";
-    //out.println(value);
+    var value = "[.js/] 3 + 4 + 5";
+    out.println(value);
   }
 #endif
 
