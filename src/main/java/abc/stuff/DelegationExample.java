@@ -46,7 +46,7 @@ public class DelegationExample {
         public String getMajor() { return major; }
     }
     static @part class TaPart implements TA {
-        @link(share=true) Student student;
+        @link(share=Person.class) Student student;
         @link Teacher teacher;
         public TaPart(Student student) {
             this.student = student;
