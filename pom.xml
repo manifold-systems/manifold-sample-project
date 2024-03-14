@@ -9,10 +9,10 @@
   <version>0.1-SNAPSHOT</version>
   
   <properties>
-    <manifold-version>2024.1.6</manifold-version>
+    <manifold-version>2024.1.7</manifold-version>
 <!-- Manifold supports JDK LTS versions 8 - 21 -->
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
 <!-- Set this option when source/target are older than the compiling JDK -->
 <!--    <maven.compiler.release>17</maven.compiler.release>-->
 <!-- Use this if compiling with Java 9 or later and targeting an older Java version  -->
