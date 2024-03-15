@@ -9,7 +9,7 @@
   <version>0.1-SNAPSHOT</version>
   
   <properties>
-    <manifold-version>2024.1.7</manifold-version>
+    <manifold-version>2024.1.8</manifold-version>
 <!-- Manifold supports JDK LTS versions 8 - 21 -->
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
