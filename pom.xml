@@ -9,7 +9,7 @@
   <version>0.1-SNAPSHOT</version>
   
   <properties>
-    <manifold-version>2024.1.8</manifold-version>
+    <manifold-version>2024.1.9</manifold-version>
 <!-- Manifold supports JDK LTS versions 8 - 21 -->
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
@@ -180,6 +180,12 @@
                 <artifactId>manifold-tuple</artifactId>
                 <version>${manifold-version}</version>
               </path>
+<!--  test with lombok -->
+<!--                <path>-->
+<!--                    <groupId>org.projectlombok</groupId>-->
+<!--                    <artifactId>lombok</artifactId>-->
+<!--                    <version>1.18.30</version>-->
+<!--                </path>-->
             </annotationProcessorPaths>
 
           </configuration>
