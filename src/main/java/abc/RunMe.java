@@ -361,12 +361,12 @@ public class RunMe {
   // via manifold-ext dependency
   private static void useStructuralInterface() {
     out.println("\n\n### Use Structural Interfaces ###\n");
-    // No casting necessary, Point indirectly implements Coordinate via extension (see MyPointExt).
+    // Point nominally implements Coordinate via interface extension (see MyPointExt).
     Coordinate coord = new Point(4, 5);
     out.println("x: " + coord.getX() + ", y: " + coord.getY());
 
-    // Casting necessary, Rectangle does not nominally implement Coordinate
-    Coordinate loc = (Coordinate) new Rectangle(3, 4, 5, 6);
+    // Rectangle structurally implements Coordinate
+    Coordinate loc = new Rectangle(3, 4, 5, 6);
     out.println("x: " + loc.getX() + ", y: " + loc.getY());
 
     // Use a registered IProxyFactory interface to make old Date structurally compatible with new ChronoLocalDateTime
@@ -437,6 +437,12 @@ public class RunMe {
     LocalTime time = LocalTime.now();
     String cool = "The time is ${time.getHour()}:${String.format(\"%02d\", time.getMinute())}";
     out.println(cool);
+
+    // use with text blocks
+    out.println( """
+            The time is:
+            $hour:$minute
+            """ );
   }
 
   // via manifold-templates dependency

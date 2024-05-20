@@ -9,8 +9,8 @@
   <version>0.1-SNAPSHOT</version>
   
   <properties>
-    <manifold-version>2024.1.9</manifold-version>
-<!-- Manifold supports JDK LTS versions 8 - 21 -->
+    <manifold-version>2024.1.15</manifold-version>
+<!-- Manifold supports JDK LTS versions 8 - 21, plus latest JDK release -->
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
 <!-- Set this option when source/target are older than the compiling JDK -->
@@ -106,7 +106,11 @@
             <compilerArgs>
               <!--Add the Manifold plugin-->
               <arg>-Xplugin:Manifold</arg>
+              <arg>--enable-preview</arg>
             </compilerArgs>
+
+<!--            <compilerArgument>-Xlint:all</compilerArgument>-->
+            <showWarnings>true</showWarnings>
 
             <!-- Add Manifold compile-time dependencies in the processor path -->
             <annotationProcessorPaths>

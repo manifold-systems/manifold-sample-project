@@ -22,7 +22,7 @@ module manifold.sample.project {
   requires java.desktop;
   requires jdk.unsupported;
 
-//// for manifold-sql-rt (EA):
+//// for use with manifold-sql
 //  requires manifold.sql.rt;
 //  requires java.sql;
 //  opens config; // allow dbconfig resource to be accessed
