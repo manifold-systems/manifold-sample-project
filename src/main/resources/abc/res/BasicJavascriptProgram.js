@@ -12,3 +12,7 @@ function incrementAndGet() {
 function identity(x) {
     return x
 }
+
+function callback(cb) {
+  cb.run()
+}

@@ -93,11 +93,16 @@ public class RunMe {
     useAutoTypeInference();
     useTupleExpressions();
     useDelegation();
+    useOptionalParameters();
 
     #if EXPERIMENTAL
     useJsonFragment();
     useGraphQLFragment();
     useJavascriptFragment();
+    #endif
+
+    #if MyBuildProp == 20 //this is set as -Akey[=value] compiler arg in pom.xml
+      System.out.println("MyBuildProp is set");
     #endif
   }
 
@@ -315,6 +320,11 @@ public class RunMe {
     // names are inferred
     var t2 = (t.name, t.age);
     System.out.println("Name: ${t2.name} Age: ${t2.age}");
+
+    // labels are optional
+    var t3 = (10, 20);
+    out.println(t3.item1);
+    out.println(t3.item2);
   }
 
   // via manifold-delegation
@@ -322,6 +332,21 @@ public class RunMe {
     out.println("\n\n### Use Delegation ###\n");
 
     DelegationExample.main(null);
+  }
+
+  // via manifold-params
+  private static void useOptionalParameters() {
+    out.println("\n\n### Use Optional Parameters ###\n");
+
+    char[] data = new char[] {'m', 'a', 'n', 'i', 'f', 'o', 'l', 'd'};
+    out.println(valueOf(data)); // use defaults for offset and count
+    out.println(valueOf(data, 4)); // use default for count
+    out.println(valueOf(data, count:4)); // use default for offset by naming count
+  }
+  private static String valueOf(char[] data,
+                                int offset = 0,
+                                int count = data.length - offset) {
+    return String.valueOf(data, offset, count);
   }
 
   // via manifold-ext dependency
@@ -421,9 +446,14 @@ public class RunMe {
     String data = new SampleClass().jailbreak().privateMethod();
     out.println(data);
 
-    @Jailbreak LocalTime time = LocalTime.now();
-    time.hour = 10; // private field
-    out.println(time);
+    // Note, usage of compiler option --release to target older JDKS may not be
+    // compatible with @Jailbreak when used on JDK types. Since the JDK does not
+    // ship with older JDKs and instead ships with filtered type info where the private
+    // fields and methods are excluded, the private type information just isn't
+    // available in the compiler.
+//    @Jailbreak LocalDateTime ldt = LocalDateTime.now();
+//    ldt.time = LocalTime.of( 5, 0 );  // private field assignment
+//    out.println(ldt);
   }
 
   // via manifold-strings dependency
@@ -485,6 +515,7 @@ public class RunMe {
     out.println(BasicJavascriptProgram.incrementAndGet());
     out.println(BasicJavascriptProgram.identity("Foo"));
     out.println(BasicJavascriptProgram.identity(1));
+    out.println(BasicJavascriptProgram.callback((Runnable)()-> out.println("callback from js")));
   }
 
 #if EXPERIMENTAL
@@ -492,7 +523,7 @@ public class RunMe {
   private static void useJavascriptFragment() {
     out.println("\n\n### Use Javascript Fragment ###\n");
 
-    // Embedded fragment (requires IJ Ultimate Edition for JS code injection editing)
+    // Embedded fragment (requires IJ Ultimate Edition for assisted JS code injection editing)
 
     /*[Sample.js/]
     function total(list) {

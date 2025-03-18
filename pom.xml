@@ -9,14 +9,12 @@
   <version>0.1-SNAPSHOT</version>
   
   <properties>
-    <manifold-version>2024.1.23</manifold-version>
+    <manifold-version>2025.1.5-SNAPSHOT</manifold-version>
 <!-- Manifold supports JDK LTS versions 8 - 21, plus latest JDK release -->
-    <maven.compiler.source>21</maven.compiler.source>
-    <maven.compiler.target>21</maven.compiler.target>
-<!-- Set this option when source/target are older than the compiling JDK -->
-<!--    <maven.compiler.release>17</maven.compiler.release>-->
+    <maven.compiler.source>24</maven.compiler.source>
+    <maven.compiler.target>24</maven.compiler.target>
 <!-- Use this if compiling with Java 9 or later and targeting an older Java version  -->
-<!-- <maven.compiler.release>6</maven.compiler.release> -->
+<!--    <maven.compiler.release>17</maven.compiler.release>-->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   
@@ -30,6 +28,11 @@
     <dependency>
       <groupId>systems.manifold</groupId>
       <artifactId>manifold-props-rt</artifactId>
+      <version>${manifold-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-params-rt</artifactId>
       <version>${manifold-version}</version>
     </dependency>
     <dependency>
@@ -106,7 +109,8 @@
             <compilerArgs>
               <!--Add the Manifold plugin-->
               <arg>-Xplugin:Manifold</arg>
-              <arg>--enable-preview</arg>
+<!--              <arg>&#45;&#45;enable-preview</arg>-->
+              <arg>-AMyBuildProp=20</arg>
             </compilerArgs>
 
 <!--            <compilerArgument>-Xlint:all</compilerArgument>-->
@@ -182,6 +186,11 @@
               <path>
                 <groupId>systems.manifold</groupId>
                 <artifactId>manifold-tuple</artifactId>
+                <version>${manifold-version}</version>
+              </path>
+              <path>
+                <groupId>systems.manifold</groupId>
+                <artifactId>manifold-params</artifactId>
                 <version>${manifold-version}</version>
               </path>
 <!--  test with lombok -->

@@ -21,8 +21,10 @@ module manifold.sample.project {
 
   requires java.desktop;
   requires jdk.unsupported;
+  requires manifold.params.rt;
+  requires org.jetbrains.annotations;
 
-//// for use with manifold-sql
+//// for use with manifold-sql (not used in this sample app rt now)
 //  requires manifold.sql.rt;
 //  requires java.sql;
 //  opens config; // allow dbconfig resource to be accessed
@@ -31,4 +33,7 @@ module manifold.sample.project {
   // (note the META-INF/services registration is still necessary for Java 8 and Java 9+ unnamed-module)
   provides manifold.ext.rt.api.IProxyFactory
     with Date_To_ChronoLocalDateTime;
+
+  // enables javascript (via rhino) to call back into calling java code
+  exports abc;
 }
