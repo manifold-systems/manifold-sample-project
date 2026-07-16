@@ -25,9 +25,7 @@ import java.awt.Rectangle;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.*;
 import java.time.chrono.ChronoLocalDateTime;
 import java.util.*;
 import java.util.function.Function;
@@ -38,7 +36,7 @@ import static java.lang.System.out;
 
 // use #define/#undef to demonstrate use of the Preprocessor
 #define EXPERIMENTAL
-#undef EXPERIMENTAL // comment out this #undef to test experimental features
+//#undef EXPERIMENTAL // comment out this #undef to test experimental features
 
 /**
  * Utilize a sampling of core Manifold features to demonstrate the
@@ -56,6 +54,7 @@ import static java.lang.System.out;
  * <li/> Rename/Move Refactor
  * <li/> Type-safe GraphQL, JSON, XML, CSV, etc.
  * <li/> Properties
+ * <li/> Parts (true delegation)
  * <li/> Tuples
  * <li/> Fragment support
  * <li/> Unit Expressions
@@ -101,7 +100,7 @@ public class RunMe {
     useJavascriptFragment();
     #endif
 
-    #if MyBuildProp == 20 //this is set as -Akey[=value] compiler arg in pom.xml
+    #if MyBuildProp == 72 //this is set as -Akey[=value] compiler arg in pom.xml
       System.out.println("MyBuildProp is set");
     #endif
   }
@@ -467,12 +466,13 @@ public class RunMe {
     LocalTime time = LocalTime.now();
     String cool = "The time is ${time.getHour()}:${String.format(\"%02d\", time.getMinute())}";
     out.println(cool);
-
+  #if JAVA_15_OR_LATER
     // use with text blocks
     out.println( """
             The time is:
             $hour:$minute
             """ );
+  #endif
   }
 
   // via manifold-templates dependency

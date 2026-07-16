@@ -9,10 +9,10 @@
   <version>0.1-SNAPSHOT</version>
   
   <properties>
-    <manifold-version>2025.1.5-SNAPSHOT</manifold-version>
-<!-- Manifold supports JDK LTS versions 8 - 21, plus latest JDK release -->
-    <maven.compiler.source>24</maven.compiler.source>
-    <maven.compiler.target>24</maven.compiler.target>
+    <manifold-version>2026.1.8-SNAPSHOT</manifold-version>
+<!-- Manifold supports JDK LTS versions 8 - 26, plus latest JDK release -->
+    <maven.compiler.source>26</maven.compiler.source>
+    <maven.compiler.target>26</maven.compiler.target>
 <!-- Use this if compiling with Java 9 or later and targeting an older Java version  -->
 <!--    <maven.compiler.release>17</maven.compiler.release>-->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,7 +22,7 @@
 <!-- Add relevant manifold runtime dependencies, compile-time dependencies are listed in annotationProcessorPath- -->
     <dependency>
       <groupId>systems.manifold</groupId>
-      <artifactId>manifold-delegation-rt</artifactId>
+      <artifactId>manifold-parts-rt</artifactId>
       <version>${manifold-version}</version>
     </dependency>
     <dependency>
@@ -84,9 +84,16 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.12</version>
+      <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
+<!-- testing w lombok-->
+<!--    <dependency>-->
+<!--      <groupId>org.projectlombok</groupId>-->
+<!--      <artifactId>lombok</artifactId>-->
+<!--      <version>1.18.38</version>-->
+<!--      <scope>provided</scope>-->
+<!--    </dependency>-->
   </dependencies>
 
   <build>
@@ -105,12 +112,14 @@
           <version>3.8.0</version>
 
           <configuration>
+<!--            <fork>true</fork>-->
             <encoding>UTF-8</encoding>
             <compilerArgs>
               <!--Add the Manifold plugin-->
               <arg>-Xplugin:Manifold</arg>
 <!--              <arg>&#45;&#45;enable-preview</arg>-->
               <arg>-AMyBuildProp=20</arg>
+              <arg>-J--add-exports=java.base/jdk.internal.access=ALL-UNNAMED</arg>
             </compilerArgs>
 
 <!--            <compilerArgument>-Xlint:all</compilerArgument>-->
@@ -120,7 +129,7 @@
             <annotationProcessorPaths>
               <path>
                 <groupId>systems.manifold</groupId>
-                <artifactId>manifold-delegation</artifactId>
+                <artifactId>manifold-parts</artifactId>
                 <version>${manifold-version}</version>
               </path>
               <path>
@@ -197,7 +206,7 @@
 <!--                <path>-->
 <!--                    <groupId>org.projectlombok</groupId>-->
 <!--                    <artifactId>lombok</artifactId>-->
-<!--                    <version>1.18.30</version>-->
+<!--                    <version>1.18.38</version>-->
 <!--                </path>-->
             </annotationProcessorPaths>
 

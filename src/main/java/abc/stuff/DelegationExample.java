@@ -1,7 +1,7 @@
 package abc.stuff;
 
-import manifold.ext.delegation.rt.api.link;
-import manifold.ext.delegation.rt.api.part;
+import manifold.ext.parts.rt.api.link;
+import manifold.ext.parts.rt.api.part;
 
 public class DelegationExample {
     interface Person {

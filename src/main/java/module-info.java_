@@ -1,13 +1,13 @@
 import manifoldsampleproject.extensions.java.time.chrono.ChronoLocalDateTime.Date_To_ChronoLocalDateTime;
 
-//!! Note this module-info.java file is unnecessary, but exists to demonstrate how to set one
-//!! up if your project must be a JPMS multi-module application.
+//!! Note this module-info.java file is unnecessary, but exists to demonstrate
+//!! how to set one up if your project is a JPMS multi-module application.
 module manifold.sample.project {
   requires manifold.util;
   requires manifold.rt;
   requires manifold.ext.rt;
   requires manifold.props.rt;
-  requires manifold.delegation.rt;
+  requires manifold.parts.rt;
   requires manifold.tuple.rt;
   requires manifold.graphql.rt;
   requires manifold.json.rt;
@@ -24,7 +24,7 @@ module manifold.sample.project {
   requires manifold.params.rt;
   requires org.jetbrains.annotations;
 
-//// for use with manifold-sql (not used in this sample app rt now)
+//// for use with manifold-sql (not used in this sample app)
 //  requires manifold.sql.rt;
 //  requires java.sql;
 //  opens config; // allow dbconfig resource to be accessed
@@ -34,6 +34,6 @@ module manifold.sample.project {
   provides manifold.ext.rt.api.IProxyFactory
     with Date_To_ChronoLocalDateTime;
 
-  // enables javascript (via rhino) to call back into calling java code
+  // for use with manifold-js: enables javascript (via rhino) to call back into the calling java code in the abc package
   exports abc;
 }
