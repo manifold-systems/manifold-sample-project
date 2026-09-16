@@ -39,7 +39,7 @@ import static java.lang.System.out;
 //#undef EXPERIMENTAL // comment out this #undef to test experimental features
 
 /**
- * Utilize a sampling of core Manifold features to demonstrate the
+ * Use a sampling of core Manifold features to demonstrate the
  * structure of a single module project using Manifold. Use the pom.xml
  * file as a template for your own project.
  * <p/>
@@ -100,7 +100,7 @@ public class RunMe {
     useJavascriptFragment();
     #endif
 
-    #if MyBuildProp == 72 //this is set as -Akey[=value] compiler arg in pom.xml
+    #if MyBuildProp == 20 //this is set as -Akey[=value] compiler arg in pom.xml
       System.out.println("MyBuildProp is set");
     #endif
   }
@@ -294,12 +294,11 @@ public class RunMe {
 
   private static void useAutoTypeInference() {
     out.println("\n\n### Use `auto` return type inference ###\n");
-    var printer = getPrinter("hello");
+    var printer = makePrinter("hello");
     printer.run();
     out.println(printer.chars); // anonymous type's chars field
   }
-
-  static auto getPrinter(String message) {
+  static auto makePrinter(String message) {
     return new Runnable() {
       int chars;
       public void run() {
@@ -307,6 +306,24 @@ public class RunMe {
         chars = message.length();
       }
     };
+  }
+
+  private static void useMultipleReturnValues()
+  {
+    out.println("\n\n### Use multiple return values ###\n");
+
+    var result = findMinMax( new int[]{1, 2, 3} );
+    System.out.println( "Minimum: " + result.min + " Maximum: " + result.max );
+  }
+  static auto findMinMax(int[] data) {
+    if(data == null || data.length == 0) return null;
+    int min = Integer.MAX_VALUE;
+    int max = Integer.MIN_VALUE;
+    for(int i: data) {
+      if(i < min) min = i;
+      if(i > max) max = i;
+    }
+    return min, max; // return multiple values
   }
 
   private static void useTupleExpressions() {
@@ -666,25 +683,6 @@ public class RunMe {
     if ("le matos" inside "a" to "m~") {
       out.println("le matos");
     }
-  }
-
-  private static void useMultipleReturnValues()
-  {
-    out.println("\n\n### Use multiple return values ###\n");
-
-    var result = findMinMax( new int[]{1, 2, 3} );
-    System.out.println( "Minimum: " + result.min + " Maximum: " + result.max );
-  }
-
-  static auto findMinMax(int[] data) {
-    if(data == null || data.length == 0) return null;
-    int min = Integer.MAX_VALUE;
-    int max = Integer.MIN_VALUE;
-    for(int i: data) {
-      if(i < min) min = i;
-      if(i > max) max = i;
-    }
-    return min, max; // return multiple values
   }
 
   /**

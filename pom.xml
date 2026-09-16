@@ -9,7 +9,7 @@
   <version>0.1-SNAPSHOT</version>
   
   <properties>
-    <manifold-version>2026.1.8-SNAPSHOT</manifold-version>
+    <manifold-version>2026.1.14</manifold-version>
 <!-- Manifold supports JDK LTS versions 8 - 26, plus latest JDK release -->
     <maven.compiler.source>26</maven.compiler.source>
     <maven.compiler.target>26</maven.compiler.target>
@@ -109,17 +109,21 @@
           <artifactId>maven-compiler-plugin</artifactId>
 
           <!-- version 3.8.0+ is necessary to support Java 10+ -->
-          <version>3.8.0</version>
+          <version>3.16.0</version>
 
           <configuration>
-<!--            <fork>true</fork>-->
+            <fork>true</fork>
             <encoding>UTF-8</encoding>
             <compilerArgs>
               <!--Add the Manifold plugin-->
               <arg>-Xplugin:Manifold</arg>
 <!--              <arg>&#45;&#45;enable-preview</arg>-->
               <arg>-AMyBuildProp=20</arg>
+
+              <!-- Use these ONLY for JDK 26+ -->
               <arg>-J--add-exports=java.base/jdk.internal.access=ALL-UNNAMED</arg>
+              <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
+              <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
             </compilerArgs>
 
 <!--            <compilerArgument>-Xlint:all</compilerArgument>-->

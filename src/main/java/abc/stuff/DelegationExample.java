@@ -1,5 +1,6 @@
 package abc.stuff;
 
+import manifold.ext.parts.rt.api.internal;
 import manifold.ext.parts.rt.api.link;
 import manifold.ext.parts.rt.api.part;
 
@@ -8,6 +9,7 @@ public class DelegationExample {
         String getName();
         String getTitle();
         String getTitledName();
+        @internal void internalMethod();
     }
     interface Teacher extends Person {
         String getDept();
@@ -18,12 +20,13 @@ public class DelegationExample {
     interface TA extends Student, Teacher {
     }
 
-    static @part class PersonPart  implements Person {
+    static @part class PersonPart implements @internal Person {
         private final String name;
         public PersonPart(String name) { this.name = name; }
         public String getName() { return name; }
         public String getTitle() { return "Person"; }
         public String getTitledName() { return getTitle() + " " + getName(); }
+        public void internalMethod() {}
     }
     static @part class TeacherPart implements  Teacher {
         @link Person person;
@@ -59,6 +62,8 @@ public class DelegationExample {
         Person person = new PersonPart("Milton");
         Student student = new StudentPart(person, "CS");
         TA ta = new TaPart(student);
+        // internalMethod() is inaccessible here :)
+        // ta.internalMethod();
         String titledName = ta.getTitledName();
         System.out.println(titledName);
     }
